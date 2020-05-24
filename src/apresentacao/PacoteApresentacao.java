@@ -1,5 +1,7 @@
 package apresentacao;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import controle.PacoteControle;
@@ -15,59 +17,58 @@ public class PacoteApresentacao {
 
 	public int cadastraPacote(Pacote pacote) {
 		// metodo para cadastrar os dados do pacote
-
+		
+		ArrayList<Uniforme> listaUniforme = new ArrayList<Uniforme>();
 		Uniforme uniforme = new Uniforme();
 		Camisa camisa = new Camisa();
 		Calca calca = new Calca();
 		Meia meia = new Meia();
-
-		/*
-		 * PACOTE - QUANTIDADE DE UNIFORMES
-		 */
+		
 		pacote.setQtdUniforme(insereQuantidadeUniforme());
-
-		/*
-		 * UNIFORME - TIPO UNIFORME
-		 */
 		uniforme.setTipo(insereTipoUniforme());
 
-		/*
-		 * CAMISA - MODELO MANGA - MODELO GOLA - TECIDO - COR PRIMARIA - COR SECUNDARIA
-		 * - TAMANHO
-		 */
-		camisa.setModeloManga(insereTipo("Manga", "CAMISA - TIPO DE MANGA"));
-		camisa.setModeloGola(insereModeloGolaCamisa());
-		camisa.setTecidoCamisa(insereTecidoCamisa());
-		camisa.setCorPrimaria(insereCor("primaria", "Camisa"));
-		camisa.setCorSecundaria(insereCor("secundaria", "Camisa"));
-		camisa.setTamanho(insereTamanho("Camisa"));
-
-		/*
-		 * CALÇA - TIPO - TECIDO - COR PRIMARIA - COR SECUNDARIA - TAMANHO
-		 */
-		calca.setTipoCalca(insereTipo("Calça", "CALÇA - TIPO DE CALÇA"));
-		calca.setTecidoCalca(insereTecidoCalca());
-		calca.setCorPrimaria(insereCor("primaria", "Calça"));
-		calca.setCorSecundaria(insereCor("secundaria", "Calça"));
-		calca.setTamanho(insereTamanho("Calça"));
-
-		/*
-		 * MEIA - TIPO - COR - TECIDO
-		 */
-		meia.setTipoMeia(insereTipo("Meia", "MEIA - TIPO DE MEIA"));
-		meia.setCor(insereCor("", "Meia"));
-		meia.setTecidoMeia(insereTecidoMeia());
-
-		uniforme.setCamisa(camisa);
-		uniforme.setCalca(calca);
-		uniforme.setMeia(meia);
-
-		PacoteControle.adicionaUniformePacote(uniforme, pacote.getQtdUniforme());
-		// chamaremos este método para montar o pacote de acordo com a quantidade de
-		// uniformes informados
-
+		PacoteControle.montaUniforme(pacote, uniforme, camisa, calca, meia);
+		// este método montará o uniforme de acordo com as informações do usuário
+		
+		PacoteControle.adicionaUniformePacote(listaUniforme, uniforme, pacote.getQtdUniforme());
+		// este método para montará o pacote de acordo com a quantidade de uniformes informados
+		
+		if(uniforme.getTipo().equals("ESPORTIVO")) {
+			
+			// se o tipo de uniforme for esportivo, poderá inserir um modelo de uniforme diferente dentro do pacote
+			// ja que goleiros sempre tem um modelo diferente
+			
+			Uniforme uniformeGoleiro = new Uniforme();
+			uniformeGoleiro = inserirModeloGoleiro(pacote);
+			PacoteControle.adicionaUniformePacote(listaUniforme, uniformeGoleiro, pacote.getQtdUniformeGoleiro());
+			
+		}
+		
 		return teste;
 
+	}
+
+	public Uniforme inserirModeloGoleiro(Pacote pacote) {
+		
+		Uniforme uniformeGoleiro = new Uniforme();
+		Camisa camisaGoleiro = new Camisa();
+		Calca calcaGoleiro = new Calca();
+		Meia meiaGoleiro = new Meia();
+		
+		Object[] options = {"Sim", "Nao"};
+		int selectedOption = JOptionPane.showOptionDialog(null, "Deseja informar uniformes de goleiro?", "ESCOLHA",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (selectedOption == JOptionPane.YES_OPTION) {
+			
+			pacote.setQtdUniformeGoleiro(insereQuantidadeUniforme());
+			uniformeGoleiro.setTipo("ESPORTIVO");
+			PacoteControle.montaUniforme(pacote, uniformeGoleiro, camisaGoleiro, calcaGoleiro, meiaGoleiro);
+		
+		}
+		
+		return uniformeGoleiro;
+		
 	}
 
 	public int insereQuantidadeUniforme() {

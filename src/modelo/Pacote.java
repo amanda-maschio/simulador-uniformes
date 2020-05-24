@@ -4,8 +4,21 @@ public class Pacote {
 	
 	private Integer codigoPacote;
 	private Integer qtdUniforme;
+	private Integer qtdUniformeGoleiro;
 	private Uniforme uniforme;
 	
+	public Integer getQtdUniformeGoleiro() {
+		return qtdUniformeGoleiro;
+	}
+	public void setQtdUniformeGoleiro(Integer qtdUniformeGoleiro) {
+		this.qtdUniformeGoleiro = qtdUniformeGoleiro;
+	}
+	public void setCodigoPacote(Integer codigoPacote) {
+		this.codigoPacote = codigoPacote;
+	}
+	public void setQtdUniforme(Integer qtdUniforme) {
+		this.qtdUniforme = qtdUniforme;
+	}
 	public int getQtdUniforme() {
 		return qtdUniforme;
 	}
