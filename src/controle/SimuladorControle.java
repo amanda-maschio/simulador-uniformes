@@ -12,7 +12,7 @@ public class SimuladorControle {
 	SimuladorApresentacao simuladorApresentacao = new SimuladorApresentacao();
 	PacoteControle pacoteControle = new PacoteControle();
 	ClienteControle clienteControle = new ClienteControle();
-
+	// Valida opção escolhida
 	public SimuladorControle() throws ParseException {
 		int op = 0;
 		while (op != 3) {
