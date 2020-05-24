@@ -12,10 +12,17 @@ import modelo.ClientePessoaJuridica;
 public class ClienteApresentacao {
 
 	public int teste = 0;
-
+	
+	/**
+	 * método para cadastrar os dados do cliente
+	 * 
+	 * @param clientePessoaFisica
+	 * @param clientePessoaJuridica
+	 * @return
+	 * @throws ParseException
+	 */
 	public int cadastraCliente(ClientePessoaFisica clientePessoaFisica, ClientePessoaJuridica clientePessoaJuridica)
 			throws ParseException {
-		// metodo para cadastrar os dados do cliente
 
 		String tipoCliente = insereTipoCliente();
 
@@ -40,20 +47,29 @@ public class ClienteApresentacao {
 
 		return teste;
 	}
-
+	
+	/**
+	 * método que le o cpf/cnpj informado pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @param tipoDeDocumento
+	 * @return
+	 */
 	private String insereDocumento(String tipoDeDocumento) {
-
-		/* DOCUMENTO */
 
 		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "TELEFONE", -1);
 
 		return documento;
 
 	}
-
+	
+	/**
+	 * método que le o sexo informado pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @return
+	 */
 	private String insereSexo() {
-
-		/* SEXO */
 
 		String sexo;
 		String optionsTipoCliente[] = { "FEMININO", "MASCULINO" };
@@ -72,10 +88,15 @@ public class ClienteApresentacao {
 		return sexo;
 
 	}
-
+	
+	/**
+	 * método que le a data de nascimento informada pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
 	private Date insereNascimento() throws ParseException {
-
-		/* NASCIMENTO */
 
 		String nascimento = JOptionPane.showInputDialog(null, "Digite a data de nascimento (dd/mm/aaaa): ",
 				"NASCIMENTO", -1);
@@ -86,13 +107,24 @@ public class ClienteApresentacao {
 		return y1;
 	}
 
+	/**
+	 * método que le o endereço informado pelo usuário e retorna este
+	 * valor
+	 * @return
+	 */
 	private String insereEndereco() {
 
 		String endereco = JOptionPane.showInputDialog(null, "Digite o endereco: ", "ENDERECO", -1);
 
 		return endereco;
 	}
-
+	
+	/**
+	 * método que le o telefone informado pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @return
+	 */
 	private String insereTelefone() {
 
 		String telefone = JOptionPane.showInputDialog(null, "Digite o telefone:", "TELEFONE", -1);
@@ -100,10 +132,14 @@ public class ClienteApresentacao {
 		return telefone;
 
 	}
-
+	
+	/**
+	 * método que le o email informado pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @return
+	 */
 	private String insereEmail() {
-
-		/* EMAIL */
 
 		String email = JOptionPane.showInputDialog(null, "Digite o e-mail:", "E-MAIL", -1);
 
@@ -111,18 +147,28 @@ public class ClienteApresentacao {
 
 	}
 
+	/**
+	 * método que le o nome/razão social informado pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @param tipoDeCliente
+	 * @param tipo
+	 * @return
+	 */
 	private String insereNomeOuRazao(String tipoDeCliente, String tipo) {
-
-		/* NOME OU RAZAO SOCIAL */
 
 		String nomeOuRazao = JOptionPane.showInputDialog(null, "Digite " + tipoDeCliente + ": ", tipo, -1);
 
 		return nomeOuRazao;
 	}
-
+	
+	/**
+	 * método que le o tipo de cliente informado pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @return
+	 */
 	private String insereTipoCliente() {
-
-		/* TIPO CLIENTE */
 
 		String tipoCliente;
 		String optionsTipoCliente[] = { "FISICA", "JURIDICA" };

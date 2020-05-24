@@ -15,65 +15,64 @@ public class PacoteApresentacao {
 
 	public int teste = 0;
 
+	/**
+	 * método para cadastrar os dados do pacote
+	 * 
+	 * @param pacote
+	 * @return
+	 */
 	public int cadastraPacote(Pacote pacote) {
-		// metodo para cadastrar os dados do pacote
-		
+
 		ArrayList<Uniforme> listaUniforme = new ArrayList<Uniforme>();
 		Uniforme uniforme = new Uniforme();
 		Camisa camisa = new Camisa();
 		Calca calca = new Calca();
 		Meia meia = new Meia();
-		
+
 		pacote.setQtdUniforme(insereQuantidadeUniforme());
 		uniforme.setTipo(insereTipoUniforme());
 
 		PacoteControle.montaUniforme(pacote, uniforme, camisa, calca, meia);
-		// este método montará o uniforme de acordo com as informações do usuário
-		
-		PacoteControle.adicionaUniformePacote(listaUniforme, uniforme, pacote.getQtdUniforme());
-		// este método para montará o pacote de acordo com a quantidade de uniformes informados
-		
-		if(uniforme.getTipo().equals("ESPORTIVO")) {
-			
+
+		PacoteControle.adicionaUniformePacote(listaUniforme, uniforme, camisa, calca, meia, pacote.getQtdUniforme());
+
+		if (uniforme.getTipo().equals("ESPORTIVO")) {
+
 			// se o tipo de uniforme for esportivo, poderá inserir um modelo de uniforme diferente dentro do pacote
-			// ja que goleiros sempre tem um modelo diferente
-			
-			Uniforme uniformeGoleiro = new Uniforme();
-			uniformeGoleiro = inserirModeloGoleiro(pacote);
-			PacoteControle.adicionaUniformePacote(listaUniforme, uniformeGoleiro, pacote.getQtdUniformeGoleiro());
-			
+
+			Object[] options = { "Sim", "Nao" };
+			int selectedOption = JOptionPane.showOptionDialog(null, "Deseja informar uniformes de goleiro?", "ESCOLHA",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			if (selectedOption == JOptionPane.YES_OPTION) {
+
+				Uniforme uniformeGoleiro = new Uniforme();
+				Camisa camisaGoleiro = new Camisa();
+				Calca calcaGoleiro = new Calca();
+				Meia meiaGoleiro = new Meia();
+
+				pacote.setQtdUniformeGoleiro(insereQuantidadeUniforme());
+				uniformeGoleiro.setTipo("ESPORTIVO");
+				
+				PacoteControle.montaUniforme(pacote, uniformeGoleiro, camisaGoleiro, calcaGoleiro, meiaGoleiro);
+				
+				PacoteControle.adicionaUniformePacote(listaUniforme, uniformeGoleiro, camisaGoleiro, calcaGoleiro,
+						meiaGoleiro, pacote.getQtdUniformeGoleiro());
+
+			}
+
 		}
-		
+
 		return teste;
 
 	}
 
-	public Uniforme inserirModeloGoleiro(Pacote pacote) {
-		
-		Uniforme uniformeGoleiro = new Uniforme();
-		Camisa camisaGoleiro = new Camisa();
-		Calca calcaGoleiro = new Calca();
-		Meia meiaGoleiro = new Meia();
-		
-		Object[] options = {"Sim", "Nao"};
-		int selectedOption = JOptionPane.showOptionDialog(null, "Deseja informar uniformes de goleiro?", "ESCOLHA",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		if (selectedOption == JOptionPane.YES_OPTION) {
-			
-			pacote.setQtdUniformeGoleiro(insereQuantidadeUniforme());
-			uniformeGoleiro.setTipo("ESPORTIVO");
-			PacoteControle.montaUniforme(pacote, uniformeGoleiro, camisaGoleiro, calcaGoleiro, meiaGoleiro);
-		
-		}
-		
-		return uniformeGoleiro;
-		
-	}
-
+	/**
+	 * método que le a quantidade de uniformes informada pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @return
+	 */
 	public int insereQuantidadeUniforme() {
-
-		/* QUANTIDADE DE UNIFORMES */
 
 		int qtdUniforme = 0;
 
@@ -83,9 +82,12 @@ public class PacoteApresentacao {
 		return qtdUniforme;
 	}
 
+	/**
+	 * método que le o tipo de uniforme informado pelo usuário e retorna este valor
+	 * 
+	 * @return
+	 */
 	public String insereTipoUniforme() {
-
-		/* TIPO DE UNIFORME */
 
 		String tipoUniforme;
 		String optionsTipoUniforme[] = { "EMPRESARIAL", "COLEGIAL", "ESPORTIVO" };
@@ -106,9 +108,15 @@ public class PacoteApresentacao {
 		return tipoUniforme;
 	}
 
+	/**
+	 * método que le o tipo de camisa/calca/meia informado pelo usuário e retorna
+	 * este valor
+	 * 
+	 * @param objeto
+	 * @param titulo
+	 * @return
+	 */
 	public String insereTipo(String objeto, String titulo) {
-
-		/* MODELO MANGA CAMISA | TIPO CALÇA | TIPO MEIA */
 
 		String tipo;
 		String optionsTipo[] = { "LONGA", "CURTA" };
@@ -128,9 +136,13 @@ public class PacoteApresentacao {
 		return tipo;
 	}
 
+	/**
+	 * método que le o modelo de gola da camisa informada pelo usuário e retorna
+	 * este valor
+	 * 
+	 * @return
+	 */
 	public String insereModeloGolaCamisa() {
-
-		/* MODELO GOLA CAMISA */
 
 		String modeloGola;
 		String optionsModeloGola[] = { "V", "CANOA", "RULE", "U", "HENLEY", "OVERSIZED" };
@@ -158,9 +170,13 @@ public class PacoteApresentacao {
 		return modeloGola;
 	}
 
+	/**
+	 * método que le a o tecido da camisa informado pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @return
+	 */
 	public String insereTecidoCamisa() {
-
-		/* TECIDO */
 
 		String tecidoCamisa;
 		String optionsTecidoCamisa[] = { "ALGODAO", "LINHO", "POLIESTER" };
@@ -182,9 +198,15 @@ public class PacoteApresentacao {
 		return tecidoCamisa;
 	}
 
+	/**
+	 * método que le a cor primaria/secundaria de camisa/calca/meia informada pelo
+	 * usuário e retorna este valor
+	 * 
+	 * @param tipoCor
+	 * @param objeto
+	 * @return
+	 */
 	public String insereCor(String tipoCor, String objeto) {
-
-		/* COR */
 
 		String cor;
 		String optionsCor[] = { "PRETO", "BRANCO", "AZUL", "VERMELHO" };
@@ -208,15 +230,22 @@ public class PacoteApresentacao {
 		return cor;
 	}
 
-	public String insereTamanho(String objeto) {
-
-		/* TAMANHO */
+	/**
+	 * método que le o tamanho de camisa/calca informada pelo usuário e retorna este
+	 * valor
+	 * 
+	 * @param objeto
+	 * @param numeroUniforme
+	 * @return
+	 */
+	public String insereTamanho(String objeto, int numeroUniforme) {
 
 		String tamanho;
 		String optionsTamanho[] = { "PP", "P", "M", "G", "GG", "EXG" };
 
-		int tipoInt = JOptionPane.showOptionDialog(null, "Escolha o tamanho da " + objeto + ": ", "TAMANHO", 0, -1,
-				null, optionsTamanho, null);
+		int tipoInt = JOptionPane.showOptionDialog(null,
+				"Escolha o tamanho da " + objeto + " do Uniforme " + numeroUniforme + ": ", "TAMANHO", 0, -1, null,
+				optionsTamanho, null);
 
 		if (tipoInt == 0) {
 			tamanho = "PP";
@@ -238,9 +267,12 @@ public class PacoteApresentacao {
 		return tamanho;
 	}
 
+	/**
+	 * método que le o tecido da calça informada pelo usuário e retorna este valor
+	 * 
+	 * @return
+	 */
 	public String insereTecidoCalca() {
-
-		/* TECIDO CALÇA */
 
 		String tecidoCalca;
 		String optionsTecidoCalca[] = { "ALGODAO", "LA", "LINHO", "CORTELINE", "MOLETOM" };
@@ -266,9 +298,12 @@ public class PacoteApresentacao {
 		return tecidoCalca;
 	}
 
+	/**
+	 * método que le o tecido da meia informada pelo usuário e retorna este valor
+	 * 
+	 * @return
+	 */
 	public String insereTecidoMeia() {
-
-		/* TECIDO MEIA */
 
 		String tecidoMeia;
 		String optionsTecidoMeia[] = { "LA", "ALGODAO", "FIBRA", "POLIESTER" };
@@ -292,4 +327,5 @@ public class PacoteApresentacao {
 		return tecidoMeia;
 
 	}
+
 }
