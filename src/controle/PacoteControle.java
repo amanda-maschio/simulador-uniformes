@@ -12,10 +12,11 @@ import modelo.Uniforme;
 public class PacoteControle {
 
 	static PacoteApresentacao pacoteApresentacao = new PacoteApresentacao();
+	private static ArrayList<Uniforme> listaPacote = new ArrayList<Uniforme>();
 
 	/**
 	 * Essa função irá adicionar uniformes em uma lista de acordo com a quantidade
-	 * de uniformes que o usuário quer O tamanho de calça e camisa será definido
+	 * de uniformes que o usuário quer. O tamanho de calça e camisa será definido
 	 * individualmente para cada uniforme
 	 * 
 	 * @param listaUniforme
@@ -26,7 +27,7 @@ public class PacoteControle {
 	 * @param qtdUniforme
 	 */
 	public static void adicionaUniformePacote(ArrayList<Uniforme> listaUniforme, Uniforme uniforme, Camisa camisa,
-			Calca calca, Meia meia, int qtdUniforme) {
+			Calca calca, Meia meia, int qtdUniforme, String isGoleiro) {
 
 		for (int i = 0; i < qtdUniforme; i++) {
 
@@ -60,7 +61,13 @@ public class PacoteControle {
 
 			uniforme2.getCamisa().setTamanho(pacoteApresentacao.insereTamanho("Camisa", i + 1));
 			uniforme2.getCalca().setTamanho(pacoteApresentacao.insereTamanho("Calça", i + 1));
-
+			
+			if(isGoleiro.equals("S")) {
+				uniforme2.setIsGoleiro("S");
+			}else {
+				uniforme2.setIsGoleiro("N");
+			}
+			
 			listaUniforme.add(uniforme2);
 
 		}
@@ -97,6 +104,88 @@ public class PacoteControle {
 		uniforme.setCamisa(camisa);
 		uniforme.setCalca(calca);
 		uniforme.setMeia(meia);
+
 	}
 
+	/**
+	 * método que chamará a lista de uniformes (pacote) a ser exibida de acordo com o que foi
+	 * cadastrado pelo usuário
+	 */
+	public static void listaPacote() {
+
+		ArrayList<Uniforme> listaPacoteGoleiro = new ArrayList<Uniforme>();
+		ArrayList<Uniforme> listaPacoteCasual = new ArrayList<Uniforme>();
+
+		listaPacote = pacoteApresentacao.getListaUniforme();
+		String listaPacoteTemporaria = "";
+		int isGoleiro = 0;
+
+		if (listaPacote.isEmpty() == false) {
+
+			for (Uniforme uniforme : listaPacote) {
+				if (uniforme.getIsGoleiro().equals("S")) {
+					listaPacoteGoleiro.add(uniforme);
+					isGoleiro = 1;
+				} else {
+					listaPacoteCasual.add(uniforme);
+				}
+			}
+
+			listaPacoteTemporaria = montaLista(listaPacoteCasual, listaPacoteTemporaria);
+
+			if (isGoleiro == 1) {
+				listaPacoteTemporaria = montaLista(listaPacoteGoleiro, listaPacoteTemporaria);
+				pacoteApresentacao.listaPacote(listaPacoteTemporaria);
+			} else {
+				pacoteApresentacao.listaPacote(listaPacoteTemporaria);
+			}
+
+		} else {
+
+			pacoteApresentacao.listaVazia();
+
+		}
+	}
+
+	/**
+	 * método que montará a lista de uniformes a ser exibida de acordo com o que foi
+	 * cadastrado pelo usuário
+	 * 
+	 * @param lista
+	 * @param listaTemporaria
+	 * @return
+	 */
+	public static String montaLista(ArrayList<Uniforme> lista, String listaTemporaria) {
+
+		int n = lista.size();
+		String tipoUniforme;
+		if (lista.get(0).getIsGoleiro().equals("S")) {
+			tipoUniforme = " UNIFORMES TIPO ESPORTIVO - MODELO GOLEIRO";
+		} else {
+			tipoUniforme = " UNIFORMES TIPO " + listaPacote.get(0).getTipo();
+		}
+
+		listaTemporaria += Integer.toString(n) + tipoUniforme + "\n\n";
+		listaTemporaria += "CAMISAS: COR " + lista.get(0).getCamisa().getCorPrimaria() + " E "
+				+ lista.get(0).getCamisa().getCorSecundaria() + " - GOLA " + lista.get(0).getCamisa().getModeloGola()
+				+ " - MANGA " + lista.get(0).getCamisa().getModeloManga() + " - TECIDO "
+				+ lista.get(0).getCamisa().getTecidoCamisa() + "\n";
+
+		listaTemporaria += "CALÇAS: COR " + lista.get(0).getCalca().getCorPrimaria() + " E "
+				+ lista.get(0).getCalca().getCorSecundaria() + " - " + lista.get(0).getCalca().getTipoCalca()
+				+ " - TECIDO " + lista.get(0).getCalca().getTecidoCalca() + "\n";
+
+		listaTemporaria += "MEIAS: COR " + lista.get(0).getMeia().getCor() + " - "
+				+ lista.get(0).getMeia().getTipoMeia() + " - TECIDO " + lista.get(0).getMeia().getTecidoMeia() + "\n\n";
+
+		for (int i = 0; i < n; i++) {
+			listaTemporaria += "TAMANHO CONJUNTO " + Integer.toString(i + 1) + ": CAMISA "
+					+ lista.get(i).getCamisa().getTamanho() + " - CALÇA " + lista.get(i).getCalca().getTamanho() + "\n";
+
+		}
+
+		listaTemporaria += "\n";
+
+		return listaTemporaria;
+	}
 }

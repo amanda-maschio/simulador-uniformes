@@ -12,7 +12,8 @@ import modelo.Pacote;
 import modelo.Uniforme;
 
 public class PacoteApresentacao {
-
+	
+	ArrayList<Uniforme> listaUniforme = new ArrayList<Uniforme>();
 	public int teste = 0;
 
 	/**
@@ -23,7 +24,6 @@ public class PacoteApresentacao {
 	 */
 	public int cadastraPacote(Pacote pacote) {
 
-		ArrayList<Uniforme> listaUniforme = new ArrayList<Uniforme>();
 		Uniforme uniforme = new Uniforme();
 		Camisa camisa = new Camisa();
 		Calca calca = new Calca();
@@ -34,7 +34,7 @@ public class PacoteApresentacao {
 
 		PacoteControle.montaUniforme(pacote, uniforme, camisa, calca, meia);
 
-		PacoteControle.adicionaUniformePacote(listaUniforme, uniforme, camisa, calca, meia, pacote.getQtdUniforme());
+		PacoteControle.adicionaUniformePacote(listaUniforme, uniforme, camisa, calca, meia, pacote.getQtdUniforme(), "N");
 
 		if (uniforme.getTipo().equals("ESPORTIVO")) {
 
@@ -45,18 +45,7 @@ public class PacoteApresentacao {
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 			if (selectedOption == JOptionPane.YES_OPTION) {
 
-				Uniforme uniformeGoleiro = new Uniforme();
-				Camisa camisaGoleiro = new Camisa();
-				Calca calcaGoleiro = new Calca();
-				Meia meiaGoleiro = new Meia();
-
-				pacote.setQtdUniformeGoleiro(insereQuantidadeUniforme());
-				uniformeGoleiro.setTipo("ESPORTIVO");
-				
-				PacoteControle.montaUniforme(pacote, uniformeGoleiro, camisaGoleiro, calcaGoleiro, meiaGoleiro);
-				
-				PacoteControle.adicionaUniformePacote(listaUniforme, uniformeGoleiro, camisaGoleiro, calcaGoleiro,
-						meiaGoleiro, pacote.getQtdUniformeGoleiro());
+				montaUniformeGoleiro(listaUniforme, pacote);
 
 			}
 
@@ -65,7 +54,30 @@ public class PacoteApresentacao {
 		return teste;
 
 	}
+	
+	/**
+	 * método responsável por montar o uniforme de goleiro
+	 * 
+	 * @param listaUniforme
+	 * @param pacote
+	 */
+	public void montaUniformeGoleiro(ArrayList<Uniforme> listaUniforme, Pacote pacote) {
+		
+		Uniforme uniformeGoleiro = new Uniforme();
+		Camisa camisaGoleiro = new Camisa();
+		Calca calcaGoleiro = new Calca();
+		Meia meiaGoleiro = new Meia();
 
+		pacote.setQtdUniformeGoleiro(insereQuantidadeUniforme());
+		uniformeGoleiro.setTipo("ESPORTIVO");
+		
+		PacoteControle.montaUniforme(pacote, uniformeGoleiro, camisaGoleiro, calcaGoleiro, meiaGoleiro);
+		
+		PacoteControle.adicionaUniformePacote(listaUniforme, uniformeGoleiro, camisaGoleiro, calcaGoleiro,
+				meiaGoleiro, pacote.getQtdUniformeGoleiro(), "S");
+		
+	}
+		
 	/**
 	 * método que le a quantidade de uniformes informada pelo usuário e retorna este
 	 * valor
@@ -327,5 +339,20 @@ public class PacoteApresentacao {
 		return tecidoMeia;
 
 	}
+	
+	public ArrayList<Uniforme> getListaUniforme() {
+		
+		return listaUniforme;
+	}
+	
+	public void listaPacote(String listaPacote) {
 
+		JOptionPane.showMessageDialog(null, listaPacote);
+	}
+	
+	public void listaVazia() {
+		
+		JOptionPane.showMessageDialog(null, "Pacote não cadastrado!",
+				"PACOTE", 1);
+	}
 }

@@ -13,7 +13,7 @@ public class SimuladorApresentacao {
 
 	public int mostraMenuPacote() {
 		String aux = JOptionPane.showInputDialog(null,
-				"1 - Adicionar Novo Pacote \n2 - Menu Principal\n\nDigite o numero correspondente a uma das opções:",
+				"1 - Adicionar Novo Pacote \n2 - Listar Pacotes cadastrados\n3 - Menu Principal\n\nDigite o numero correspondente a uma das opções:",
 				"PACOTE", -1);
 		int opcao = Integer.parseInt(aux);
 		return opcao;

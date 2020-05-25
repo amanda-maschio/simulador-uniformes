@@ -4,10 +4,17 @@ public class Uniforme{
 	
 	private Integer codigoUniforme;
 	private String tipo; // Esportivo | Escolar | Empresa
+	private String isGoleiro;
 	private Camisa camisa;
 	private Calca calca;
 	private Meia meia;
 	
+	public String getIsGoleiro() {
+		return isGoleiro;
+	}
+	public void setIsGoleiro(String isGoleiro) {
+		this.isGoleiro = isGoleiro;
+	}
 	public Integer getCodigoUniforme() {
 		return codigoUniforme;
 	}
