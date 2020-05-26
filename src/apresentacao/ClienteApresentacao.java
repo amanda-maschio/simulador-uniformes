@@ -6,11 +6,15 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import controle.ClienteControle;
 import modelo.ClientePessoaFisica;
 import modelo.ClientePessoaJuridica;
 
 public class ClienteApresentacao {
-
+	
+	ClientePessoaFisica clientePessoaFisica = new ClientePessoaFisica();
+	ClientePessoaJuridica clientePessoaJuridica = new ClientePessoaJuridica();
+	
 	public int teste = 0;
 	
 	/**
@@ -21,33 +25,24 @@ public class ClienteApresentacao {
 	 * @return
 	 * @throws ParseException
 	 */
-	public int cadastraCliente(ClientePessoaFisica clientePessoaFisica, ClientePessoaJuridica clientePessoaJuridica)
+	public int cadastraCliente()
 			throws ParseException {
 
 		String tipoCliente = insereTipoCliente();
 
 		if (tipoCliente.equals("FISICA")) {
-
-			clientePessoaFisica.setNome(insereNomeOuRazao("o nome", "NOME"));
-			clientePessoaFisica.setEmail(insereEmail());
-			clientePessoaFisica.setTelefone(insereTelefone());
-			clientePessoaFisica.setEndereco(insereEndereco());
-			clientePessoaFisica.setNascimento(insereNascimento());
-			clientePessoaFisica.setSexo(insereSexo());
-			clientePessoaFisica.setCpf(insereDocumento("CPF"));
-
+			
+			ClienteControle.cadastraClienteFisica(clientePessoaFisica);
+		
 		} else {
-
-			clientePessoaJuridica.setRazaoSocial(insereNomeOuRazao("a razao social", "RAZAO SOCIAL"));
-			clientePessoaJuridica.setEmail(insereEmail());
-			clientePessoaJuridica.setTelefone(insereTelefone());
-			clientePessoaJuridica.setEndereco(insereEndereco());
-			clientePessoaJuridica.setCnpj(insereDocumento("CNPJ"));
+			
+			ClienteControle.cadastraClienteJuridica(clientePessoaJuridica);
+			
 		}
 
 		return teste;
 	}
-	
+
 	/**
 	 * método que le o cpf/cnpj informado pelo usuário e retorna este
 	 * valor
@@ -55,7 +50,7 @@ public class ClienteApresentacao {
 	 * @param tipoDeDocumento
 	 * @return
 	 */
-	private String insereDocumento(String tipoDeDocumento) {
+	public String insereDocumento(String tipoDeDocumento) {
 
 		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "TELEFONE", -1);
 
@@ -69,7 +64,7 @@ public class ClienteApresentacao {
 	 * 
 	 * @return
 	 */
-	private String insereSexo() {
+	public String insereSexo() {
 
 		String sexo;
 		String optionsTipoCliente[] = { "FEMININO", "MASCULINO" };
@@ -96,7 +91,7 @@ public class ClienteApresentacao {
 	 * @return
 	 * @throws ParseException
 	 */
-	private Date insereNascimento() throws ParseException {
+	public Date insereNascimento() throws ParseException {
 
 		String nascimento = JOptionPane.showInputDialog(null, "Digite a data de nascimento (dd/mm/aaaa): ",
 				"NASCIMENTO", -1);
@@ -112,7 +107,7 @@ public class ClienteApresentacao {
 	 * valor
 	 * @return
 	 */
-	private String insereEndereco() {
+	public String insereEndereco() {
 
 		String endereco = JOptionPane.showInputDialog(null, "Digite o endereco: ", "ENDERECO", -1);
 
@@ -125,7 +120,7 @@ public class ClienteApresentacao {
 	 * 
 	 * @return
 	 */
-	private String insereTelefone() {
+	public String insereTelefone() {
 
 		String telefone = JOptionPane.showInputDialog(null, "Digite o telefone:", "TELEFONE", -1);
 
@@ -139,7 +134,7 @@ public class ClienteApresentacao {
 	 * 
 	 * @return
 	 */
-	private String insereEmail() {
+	public String insereEmail() {
 
 		String email = JOptionPane.showInputDialog(null, "Digite o e-mail:", "E-MAIL", -1);
 
@@ -155,7 +150,7 @@ public class ClienteApresentacao {
 	 * @param tipo
 	 * @return
 	 */
-	private String insereNomeOuRazao(String tipoDeCliente, String tipo) {
+	public String insereNomeOuRazao(String tipoDeCliente, String tipo) {
 
 		String nomeOuRazao = JOptionPane.showInputDialog(null, "Digite " + tipoDeCliente + ": ", tipo, -1);
 
@@ -168,7 +163,7 @@ public class ClienteApresentacao {
 	 * 
 	 * @return
 	 */
-	private String insereTipoCliente() {
+	public String insereTipoCliente() {
 
 		String tipoCliente;
 		String optionsTipoCliente[] = { "FISICA", "JURIDICA" };
@@ -185,5 +180,44 @@ public class ClienteApresentacao {
 		}
 
 		return tipoCliente;
+	}
+
+	/**
+	 * metodo responsavel por pegar e retornar o objeto ClientePessoaFisica
+	 * 
+	 * @return
+	 */
+	public ClientePessoaFisica getClientePessoaFisica() {
+
+		return clientePessoaFisica;
+	}
+	
+	/**
+	 * metodo responsavel por pegar e retornar o objeto ClientePessoaJuridica
+	 * @return
+	 */
+	public ClientePessoaJuridica getClientePessoaJuridica() {
+		
+		return clientePessoaJuridica;
+	}
+	
+	/**
+	 * Informa se o cliente não foi cadastrado (objeto nulo)
+	 */
+	public void listaVazia() {
+
+		JOptionPane.showMessageDialog(null, "Cliente não cadastrado!", "CLIENTE", 1);
+
+	}
+	
+	/**
+	 * exibe a string ListaCliente ao usuario
+	 * 
+	 * @param listaCliente
+	 */
+	public void listaCliente(String listaCliente) {
+
+		JOptionPane.showMessageDialog(null, listaCliente);
+
 	}
 }

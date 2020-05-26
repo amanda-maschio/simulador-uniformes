@@ -159,28 +159,39 @@ public class PacoteControle {
 
 		int n = lista.size();
 		String tipoUniforme;
+		
 		if (lista.get(0).getIsGoleiro().equals("S")) {
-			tipoUniforme = " UNIFORMES TIPO ESPORTIVO - MODELO GOLEIRO";
+			tipoUniforme = " UNIFORME(S) TIPO ESPORTIVO - MODELO GOLEIRO";
 		} else {
-			tipoUniforme = " UNIFORMES TIPO " + listaPacote.get(0).getTipo();
+			tipoUniforme = " UNIFORME(S) TIPO " + listaPacote.get(0).getTipo();
 		}
 
 		listaTemporaria += Integer.toString(n) + tipoUniforme + "\n\n";
-		listaTemporaria += "CAMISAS: COR " + lista.get(0).getCamisa().getCorPrimaria() + " E "
-				+ lista.get(0).getCamisa().getCorSecundaria() + " - GOLA " + lista.get(0).getCamisa().getModeloGola()
-				+ " - MANGA " + lista.get(0).getCamisa().getModeloManga() + " - TECIDO "
-				+ lista.get(0).getCamisa().getTecidoCamisa() + "\n";
+		
+		listaTemporaria += "CAMISA(S): COR " 
+				+ lista.get(0).getCamisa().getCorPrimaria() 
+				+ " E "	+ lista.get(0).getCamisa().getCorSecundaria() 
+				+ " - GOLA " + lista.get(0).getCamisa().getModeloGola()
+				+ " - MANGA " + lista.get(0).getCamisa().getModeloManga() 
+				+ " - TECIDO " + lista.get(0).getCamisa().getTecidoCamisa() + "\n";
 
-		listaTemporaria += "CALÇAS: COR " + lista.get(0).getCalca().getCorPrimaria() + " E "
-				+ lista.get(0).getCalca().getCorSecundaria() + " - " + lista.get(0).getCalca().getTipoCalca()
+		listaTemporaria += "CALÇA(S): COR " 
+				+ lista.get(0).getCalca().getCorPrimaria() 
+				+ " E " + lista.get(0).getCalca().getCorSecundaria() 
+				+ " - " + lista.get(0).getCalca().getTipoCalca()
 				+ " - TECIDO " + lista.get(0).getCalca().getTecidoCalca() + "\n";
 
-		listaTemporaria += "MEIAS: COR " + lista.get(0).getMeia().getCor() + " - "
-				+ lista.get(0).getMeia().getTipoMeia() + " - TECIDO " + lista.get(0).getMeia().getTecidoMeia() + "\n\n";
+		listaTemporaria += "MEIA(S): COR " 
+				+ lista.get(0).getMeia().getCor() 
+				+ " - " + lista.get(0).getMeia().getTipoMeia() 
+				+ " - TECIDO " + lista.get(0).getMeia().getTecidoMeia() + "\n\n";
 
 		for (int i = 0; i < n; i++) {
-			listaTemporaria += "TAMANHO CONJUNTO " + Integer.toString(i + 1) + ": CAMISA "
-					+ lista.get(i).getCamisa().getTamanho() + " - CALÇA " + lista.get(i).getCalca().getTamanho() + "\n";
+			
+			listaTemporaria += "TAMANHO CONJUNTO " 
+					+ Integer.toString(i + 1) 
+					+ ": CAMISA " + lista.get(i).getCamisa().getTamanho() 
+					+ " - CALÇA " + lista.get(i).getCalca().getTamanho() + "\n";
 
 		}
 

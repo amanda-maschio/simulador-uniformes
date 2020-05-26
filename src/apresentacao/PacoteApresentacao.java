@@ -40,7 +40,7 @@ public class PacoteApresentacao {
 
 			// se o tipo de uniforme for esportivo, poderá inserir um modelo de uniforme diferente dentro do pacote
 
-			Object[] options = { "Sim", "Nao" };
+			Object[] options = { "SIM", "NÃO" };
 			int selectedOption = JOptionPane.showOptionDialog(null, "Deseja informar uniformes de goleiro?", "ESCOLHA",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 			if (selectedOption == JOptionPane.YES_OPTION) {
@@ -340,19 +340,31 @@ public class PacoteApresentacao {
 
 	}
 	
+	/**
+	 * método que retorna a listaUniforme
+	 * 
+	 * @return
+	 */
 	public ArrayList<Uniforme> getListaUniforme() {
 		
 		return listaUniforme;
 	}
 	
+	/**
+	 * exibe a string ListaPacote ao usuario
+	 * 
+	 * @param listaPacote
+	 */
 	public void listaPacote(String listaPacote) {
 
 		JOptionPane.showMessageDialog(null, listaPacote);
 	}
-	
+
+	/**
+	 * Informa se a lista estiver vazia
+	 */
 	public void listaVazia() {
-		
-		JOptionPane.showMessageDialog(null, "Pacote não cadastrado!",
-				"PACOTE", 1);
+
+		JOptionPane.showMessageDialog(null, "Pacote não cadastrado!", "PACOTE", 1);
 	}
 }

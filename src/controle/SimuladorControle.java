@@ -31,11 +31,14 @@ public class SimuladorControle {
 
 	private void menuCliente() throws ParseException {
 		int op = 0;
-		while (op != 2) {
+		while (op != 3) {
 			op = simuladorApresentacao.mostraMenuCliente();
 			switch (op) {
 			case 1:
 				adicionaClienteControle();
+				break;
+			case 2:
+				pesquisaClienteControle();
 				break;
 			}
 		}
@@ -66,9 +69,13 @@ public class SimuladorControle {
 	}
 
 	private void adicionaClienteControle() throws ParseException {
-		ClientePessoaFisica clientePessoaFisica = new ClientePessoaFisica();
-		ClientePessoaJuridica clientePessoaJuridica = new ClientePessoaJuridica();
-		clienteControle.clienteApresentacao.cadastraCliente(clientePessoaFisica, clientePessoaJuridica);
+		
+		ClienteControle.clienteApresentacao.cadastraCliente();
 	}
+	
+	private void pesquisaClienteControle() {
+		ClienteControle.listaCliente();
+	}
+
 
 }
