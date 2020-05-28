@@ -16,10 +16,10 @@ public class SimuladorControle {
 			op = simuladorApresentacao.mostraMenuPrincipal();
 			switch (op) {
 			case 1:
-				menuPacote();
+				menuCliente();
 				break;
 			case 2:
-				menuCliente();
+				menuPacote();
 				break;
 			}
 		}
@@ -43,13 +43,16 @@ public class SimuladorControle {
 
 	public void menuPacote() {
 		int op = 0;
-		while (op != 3) {
+		while (op != 4) {
 			op = simuladorApresentacao.mostraMenuPacote();
 			switch (op) {
 			case 1:
 				adicionaPacoteControle();
 				break;
 			case 2:
+				pesquisaTodosPacotesControle();
+				break;
+			case 3:
 				pesquisaPacoteControle();
 				break;
 			}
@@ -62,6 +65,10 @@ public class SimuladorControle {
 	
 	private void pesquisaPacoteControle() {
 		PacoteControle.listaPacote();
+	}
+	
+	private void pesquisaTodosPacotesControle() {
+		PacoteControle.listaTodosPacotesResumidos();
 	}
 
 	private void adicionaClienteControle() throws ParseException {

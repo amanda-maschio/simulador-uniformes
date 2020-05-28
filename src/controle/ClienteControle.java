@@ -5,7 +5,6 @@ import java.text.ParseException;
 import apresentacao.ClienteApresentacao;
 import modelo.ClientePessoaFisica;
 import modelo.ClientePessoaJuridica;
-import modelo.Pedido;
 
 public class ClienteControle {
 
@@ -18,19 +17,16 @@ public class ClienteControle {
 	 * @throws ParseException
 	 */
 	public static void cadastraCliente() throws ParseException {
-		
-		Pedido pedido = new Pedido();
+
 		String tipoCliente = clienteApresentacao.insereTipoCliente();
 
 		if (tipoCliente.equals("FISICA")) {
 			
 			clientePessoaFisica = cadastraClienteFisica();
-			pedido.setClientePessoaFisica(clientePessoaFisica);
 			
 		} else {
 			
 			clientePessoaJuridica = cadastraClienteJuridica();
-			pedido.setClientePessoaJuridica(clientePessoaJuridica);
 			
 		}
 		
@@ -132,6 +128,16 @@ public class ClienteControle {
 		+ "TELEFONE: " + clientePessoaFisica.getTelefone();
 		
 		return listaFisica;
+	}
+	
+	public static ClientePessoaFisica getClientePessoaFisica() {
+		
+		return clientePessoaFisica;
+	}
+	
+	public static ClientePessoaJuridica getClientePessoaJuridica() {
+		
+		return clientePessoaJuridica;
 	}
 	
 }

@@ -12,7 +12,8 @@ import modelo.Uniforme;
 public class PacoteControle {
 
 	static PacoteApresentacao pacoteApresentacao = new PacoteApresentacao();
-	static Pacote pacote = new Pacote();
+	static ArrayList<Pacote> listaPacotes = new ArrayList<>();
+	static Pacote pacoteLista = new Pacote(); //este pacote receberá o pacote criado no CadastraPacote(), para conseguirmos exibir a listagem detalhada do pacote
 	static int testaMeia = 0;
 	
 	/**
@@ -21,25 +22,46 @@ public class PacoteControle {
 	 */
 	public static void cadastraPacote() {
 
-		Uniforme uniforme = new Uniforme();
-		
-		pacote.setNomePacote(pacoteApresentacao.insereNomePacote());
-		pacote.setQtdUniforme(pacoteApresentacao.insereQuantidadeUniforme());
-		uniforme.setTipo(pacoteApresentacao.insereTipoUniforme());
+		if (ClienteControle.getClientePessoaFisica().getCpf() == null
+				&& ClienteControle.getClientePessoaJuridica().getCnpj() == null) {
+			
+			pacoteApresentacao.clienteVazio();
+			
+		} 
+		else {
 
-		montaUniforme(uniforme);
-		adicionaUniformePacote(uniforme, pacote.getQtdUniforme(), 0);
+			do {
 
-		if (uniforme.getTipo().equals("ESPORTIVO")) {
+				testaMeia = 0;
+				Pacote pacote = new Pacote();
+				Uniforme uniforme = new Uniforme();
 
-			// se o tipo de uniforme for esportivo, poderá inserir um modelo de uniforme diferente dentro do pacote
+				pacote.setNomePacote(pacoteApresentacao.insereNomePacote());
+				pacote.setQtdUniforme(pacoteApresentacao.insereQuantidadeUniforme());
+				uniforme.setTipo(pacoteApresentacao.insereTipoUniforme());
 
-			if (pacoteApresentacao.informaUniformeGoleiro()) {
+				montaUniforme(uniforme);
+				adicionaUniformePacote(pacote, uniforme, pacote.getQtdUniforme(), 0);
 
-				montaUniformeGoleiro(pacote.getListaUniformes(), pacote);
-			}
+				if (uniforme.getTipo().equals("ESPORTIVO")) {
+
+					// se o tipo de uniforme for esportivo, poderá inserir um modelo de uniforme diferente dentro do pacote
+
+					if (pacoteApresentacao.informaUniformeGoleiro()) {
+
+						montaUniformeGoleiro(pacote.getListaUniformes(), pacote);
+					}
+				}
+
+				pacoteLista = pacote;
+				listaPacotes.add(pacote);
+				listaPacote();
+
+			} while (pacoteApresentacao.insereNovoPacote()); //Enquanto o usuário optar por incluir novos pacotes, a operação repetirá
+			
+			PedidoControle.CadastraPedido();
+			
 		}
-
 	}
 	
 	/**
@@ -95,7 +117,7 @@ public class PacoteControle {
 
 		PacoteControle.montaUniforme(uniformeGoleiro);
 
-		adicionaUniformePacote(uniformeGoleiro, pacote.getQtdUniformeGoleiro(), 1);
+		adicionaUniformePacote(pacote, uniformeGoleiro, pacote.getQtdUniformeGoleiro(), 1);
 
 	}
 	
@@ -108,7 +130,7 @@ public class PacoteControle {
 	 * @param qtdUniforme
 	 * @param isGoleiro
 	 */
-	public static void adicionaUniformePacote(Uniforme uniforme, int qtdUniforme, int isGoleiro) {
+	public static void adicionaUniformePacote(Pacote pacote, Uniforme uniforme, int qtdUniforme, int isGoleiro) {
 
 		for (int i = 0; i < qtdUniforme; i++) {
 
@@ -167,7 +189,7 @@ public class PacoteControle {
 
 		ArrayList<Uniforme> listaPacoteGoleiro = new ArrayList<Uniforme>();
 		ArrayList<Uniforme> listaPacoteCasual = new ArrayList<Uniforme>();
-		ArrayList<Uniforme> listaPacote = pacote.getListaUniformes();
+		ArrayList<Uniforme> listaPacote = pacoteLista.getListaUniformes();
 		
 		String listaPacoteTemporaria = "";
 		int isGoleiro = 0;
@@ -215,23 +237,35 @@ public class PacoteControle {
 		if (lista.get(0).getIsGoleiro().equals("S")) {
 			tipoUniforme = " UNIFORME(S) TIPO ESPORTIVO - MODELO GOLEIRO";
 		} else {
-			tipoUniforme = " UNIFORME(S) TIPO " + pacote.getListaUniformes().get(0).getTipo();
+			tipoUniforme = " UNIFORME(S) TIPO " + pacoteLista.getListaUniformes().get(0).getTipo();
 		}
 		
-		listaTemporaria += "PACOTE " + pacote.getNomePacote() + "\n\n";
+		listaTemporaria += "PACOTE " + pacoteLista.getNomePacote() + "\n\n";
 		listaTemporaria += Integer.toString(n) + tipoUniforme + "\n\n";
 		
-		listaTemporaria += "CAMISA(S): COR " 
-				+ lista.get(0).getCamisa().getCorPrimaria() 
-				+ " E "	+ lista.get(0).getCamisa().getCorSecundaria() 
-				+ " - GOLA " + lista.get(0).getCamisa().getModeloGola()
+		if(lista.get(0).getCamisa().getCorPrimaria().equals(lista.get(0).getCamisa().getCorSecundaria())){
+			listaTemporaria += "CAMISA(S): COR " 
+					+ lista.get(0).getCamisa().getCorPrimaria();
+		}else {
+			listaTemporaria += "CAMISA(S): COR " 
+					+ lista.get(0).getCamisa().getCorPrimaria() 
+					+ " E "	+ lista.get(0).getCamisa().getCorSecundaria();
+		}
+		
+		listaTemporaria	+= " - GOLA " + lista.get(0).getCamisa().getModeloGola()
 				+ " - MANGA " + lista.get(0).getCamisa().getModeloManga() 
 				+ " - TECIDO " + lista.get(0).getCamisa().getTecidoCamisa() + "\n";
-
-		listaTemporaria += "CALÇA(S): COR " 
-				+ lista.get(0).getCalca().getCorPrimaria() 
-				+ " E " + lista.get(0).getCalca().getCorSecundaria() 
-				+ " - " + lista.get(0).getCalca().getTipoCalca()
+		
+		if(lista.get(0).getCalca().getCorPrimaria().equals(lista.get(0).getCalca().getCorSecundaria())) {
+			listaTemporaria += "CALÇA(S): COR " 
+					+ lista.get(0).getCalca().getCorPrimaria();
+		}else {
+			listaTemporaria += "CALÇA(S): COR " 
+					+ lista.get(0).getCalca().getCorPrimaria() 
+					+ " E " + lista.get(0).getCalca().getCorSecundaria();
+		}
+		
+		listaTemporaria	+= " - " + lista.get(0).getCalca().getTipoCalca()
 				+ " - TECIDO " + lista.get(0).getCalca().getTecidoCalca() + "\n";
 		
 		if(testaMeia == 1) {
@@ -257,6 +291,46 @@ public class PacoteControle {
 		listaTemporaria += "\n";
 
 		return listaTemporaria;
+	}
+	
+	/**
+	 * Listagem resumida de todos os pacotes inseridos
+	 */
+	public static void listaTodosPacotesResumidos() {
+		
+		String listaTodosPacotesResumidos = "";
+			
+		if (listaPacotes.isEmpty()) {
+			
+			pacoteApresentacao.listaVazia();
+			
+		} else {
+
+			for (int i = 0; i < listaPacotes.size(); i++) {
+
+				listaTodosPacotesResumidos += "PACOTE " + Integer.toString(i + 1) + ": "
+						+ listaPacotes.get(i).getNomePacote() + " - " + listaPacotes.get(i).getQtdUniforme()
+						+ " UNIFORMES TIPO " + listaPacotes.get(i).getListaUniformes().get(i).getTipo();
+
+				if (listaPacotes.get(i).getQtdUniformeGoleiro() > 0) {
+
+					listaTodosPacotesResumidos += " " + listaPacotes.get(i).getQtdUniformeGoleiro() + " UNIFORMES TIPO "
+							+ listaPacotes.get(i).getListaUniformes().get(i).getTipo() + " MODELO GOLEIRO";
+
+				}
+
+				listaTodosPacotesResumidos += "\n";
+			}
+			
+			pacoteApresentacao.listaTodosPacotes(listaTodosPacotesResumidos);
+			
+		}
+
+	}
+	
+	public static  ArrayList<Pacote> getListaPacotes() {
+		
+		return listaPacotes;
 	}
 
 }

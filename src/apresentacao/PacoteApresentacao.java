@@ -254,9 +254,36 @@ public class PacoteApresentacao {
 
 		JOptionPane.showMessageDialog(null, listaPacote);
 	}
+	
+	public void listaTodosPacotes(String listaTodosPacotes) {
+
+		JOptionPane.showMessageDialog(null, listaTodosPacotes);
+	}
 
 	public void listaVazia() {
 
-		JOptionPane.showMessageDialog(null, "Pacote não cadastrado!", "PACOTE", 1);
+		JOptionPane.showMessageDialog(null, "Nenhum pacote cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
 	}
+	
+	public Boolean insereNovoPacote() {
+		
+		Boolean insereNovoPacote = false;
+		
+		Object[] options = { "INSERIR NOVO PACOTE", "FINALIZAR PEDIDO" };
+		int selectedOption = JOptionPane.showOptionDialog(null, "Pacote incluído. Deseja incluir mais Pacotes ou finalizar o Pedido?", "ESCOLHA",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (selectedOption == JOptionPane.YES_OPTION) {
+
+			insereNovoPacote = true;
+		}
+		
+		return insereNovoPacote;
+	}
+
+	public void clienteVazio() {
+		
+		JOptionPane.showMessageDialog(null, "Insira um Cliente primeiro!", "ERRO", JOptionPane.ERROR_MESSAGE);
+		
+	}
+
 }

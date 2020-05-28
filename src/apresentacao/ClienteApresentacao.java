@@ -98,7 +98,7 @@ public class ClienteApresentacao {
 
 	public void listaVazia() {
 
-		JOptionPane.showMessageDialog(null, "Cliente não cadastrado!", "CLIENTE", 1);
+		JOptionPane.showMessageDialog(null, "Cliente não cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
 
 	}
 	

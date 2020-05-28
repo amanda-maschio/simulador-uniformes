@@ -15,6 +15,9 @@ public class Pedido {
 	public ArrayList<Pacote> getListaPacotes() {
 		return listaPacotes;
 	}
+	public void setListaPacotes(ArrayList<Pacote> listaPacotes) {
+		this.listaPacotes = listaPacotes;
+	}
 	public Integer getCodigoPedido() {
 		return codigoPedido;
 	}
@@ -51,8 +54,4 @@ public class Pedido {
 	public void setClientePessoaFisica(ClientePessoaFisica clientePessoaFisica) {
 		this.clientePessoaFisica = clientePessoaFisica;
 	}
-	public void addPacote(Pacote pacote) {
-		listaPacotes.add(pacote);
-	}
-
 }
