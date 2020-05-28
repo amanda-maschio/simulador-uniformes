@@ -3,9 +3,6 @@ package controle;
 import java.text.ParseException;
 
 import apresentacao.SimuladorApresentacao;
-import modelo.ClientePessoaFisica;
-import modelo.ClientePessoaJuridica;
-import modelo.Pacote;
 
 public class SimuladorControle {
 
@@ -60,8 +57,7 @@ public class SimuladorControle {
 	}
 
 	private void adicionaPacoteControle() {
-		Pacote pacote = new Pacote();
-		PacoteControle.pacoteApresentacao.cadastraPacote(pacote);
+		PacoteControle.cadastraPacote();
 	}
 	
 	private void pesquisaPacoteControle() {
@@ -70,7 +66,7 @@ public class SimuladorControle {
 
 	private void adicionaClienteControle() throws ParseException {
 		
-		ClienteControle.clienteApresentacao.cadastraCliente();
+		ClienteControle.cadastraCliente();
 	}
 	
 	private void pesquisaClienteControle() {

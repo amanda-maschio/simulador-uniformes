@@ -1,12 +1,27 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Pacote {
 	
 	private Integer codigoPacote;
+	private String nomePacote;
 	private Integer qtdUniforme;
 	private Integer qtdUniformeGoleiro;
-	private Uniforme uniforme;
+	private ArrayList<Uniforme> listaUniformes = new ArrayList<>();
 	
+	public String getNomePacote() {
+		return nomePacote;
+	}
+	public void setNomePacote(String nomePacote) {
+		this.nomePacote = nomePacote;
+	}
+	public void setListaUniformes(ArrayList<Uniforme> listaUniformes) {
+		this.listaUniformes = listaUniformes;
+	}
+	public ArrayList<Uniforme> getListaUniformes() {
+		return listaUniformes;
+	}
 	public Integer getQtdUniformeGoleiro() {
 		return qtdUniformeGoleiro;
 	}
@@ -31,12 +46,8 @@ public class Pacote {
 	public void setCodigoPacote(int codigoPacote) {
 		this.codigoPacote = codigoPacote;
 	}
-	public Uniforme getUniforme() {
-		return uniforme;
+	public void addUniforme(Uniforme uniforme) {
+		listaUniformes.add(uniforme);
 	}
-	public void setUniforme(Uniforme uniforme) {
-		this.uniforme = uniforme;
-	}
-	
 	
 }

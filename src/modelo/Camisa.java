@@ -3,8 +3,8 @@ package modelo;
 public class Camisa{
 	
 	private Integer codigoCamisa;
-	private String modeloManga; //longa | curta
-	private String modeloGola; // v | canoa | rule | u | henley | oversized
+	private String modeloManga; // longa | curta
+	private String modeloGola; // v | canoa | rule | u
 	private String tecidoCamisa; // algodão | linho | poliester
 	private String corPrimaria;
 	private String corSecundaria;

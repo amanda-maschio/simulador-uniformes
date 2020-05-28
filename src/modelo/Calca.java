@@ -4,7 +4,7 @@ public class Calca{
 	
 	private Integer codigoCalca;
 	private String tipoCalca; // longa | curta
-	private String tecidoCalca; // algodao | la | linho | corteline | moletom
+	private String tecidoCalca; // algodao | la | linho | moletom
 	private String corPrimaria;
 	private String corSecundaria;
 	private String tamanho; // P | PP | M | G | GG | EXG

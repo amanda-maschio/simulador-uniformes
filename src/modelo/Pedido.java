@@ -1,4 +1,5 @@
 package modelo;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
@@ -7,9 +8,13 @@ public class Pedido {
 	private Integer qtdPacote;
 	private Date dataCompra; 
 	private Double valorCompra;
-	private ClientePessoaJuridica cliente; 
-	private Pacote pacote;
+	private ClientePessoaJuridica clientePessoaJuridica; 
+	private ClientePessoaFisica clientePessoaFisica;
+	private ArrayList<Pacote> listaPacotes = new ArrayList<>();
 	
+	public ArrayList<Pacote> getListaPacotes() {
+		return listaPacotes;
+	}
 	public Integer getCodigoPedido() {
 		return codigoPedido;
 	}
@@ -34,18 +39,20 @@ public class Pedido {
 	public void setValorCompra(Double valorCompra) {
 		this.valorCompra = valorCompra;
 	}
-	public ClientePessoaJuridica getCliente() {
-		return cliente;
+	public ClientePessoaJuridica getClientePessoaJuridica() {
+		return clientePessoaJuridica;
 	}
-	public void setCliente(ClientePessoaJuridica cliente) {
-		this.cliente = cliente;
+	public void setClientePessoaJuridica(ClientePessoaJuridica clientePessoaJuridica) {
+		this.clientePessoaJuridica = clientePessoaJuridica;
 	}
-	public Pacote getPacote() {
-		return pacote;
+	public ClientePessoaFisica getClientePessoaFisica() {
+		return clientePessoaFisica;
 	}
-	public void setPacote(Pacote pacote) {
-		this.pacote = pacote;
+	public void setClientePessoaFisica(ClientePessoaFisica clientePessoaFisica) {
+		this.clientePessoaFisica = clientePessoaFisica;
+	}
+	public void addPacote(Pacote pacote) {
+		listaPacotes.add(pacote);
 	}
 
-	
 }

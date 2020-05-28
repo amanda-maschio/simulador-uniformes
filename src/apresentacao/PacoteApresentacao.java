@@ -1,89 +1,19 @@
 package apresentacao;
 
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
-import controle.PacoteControle;
-import modelo.Calca;
-import modelo.Camisa;
-import modelo.Meia;
-import modelo.Pacote;
-import modelo.Uniforme;
 
 public class PacoteApresentacao {
 	
-	ArrayList<Uniforme> listaUniforme = new ArrayList<Uniforme>();
 	public int teste = 0;
+	
+	public String insereNomePacote() {
 
-	/**
-	 * método para cadastrar os dados do pacote
-	 * 
-	 * @param pacote
-	 * @return
-	 */
-	public int cadastraPacote(Pacote pacote) {
+		String nomePacote = JOptionPane.showInputDialog(null, "Informe um nome para o seu pacote (Exemplo: UNIFORMES MARCOPOLO SETOR COMPRAS):", "NOME PACOTE", -1);
 
-		Uniforme uniforme = new Uniforme();
-		Camisa camisa = new Camisa();
-		Calca calca = new Calca();
-		Meia meia = new Meia();
-
-		pacote.setQtdUniforme(insereQuantidadeUniforme());
-		uniforme.setTipo(insereTipoUniforme());
-
-		PacoteControle.montaUniforme(pacote, uniforme, camisa, calca, meia);
-
-		PacoteControle.adicionaUniformePacote(listaUniforme, uniforme, camisa, calca, meia, pacote.getQtdUniforme(), "N");
-
-		if (uniforme.getTipo().equals("ESPORTIVO")) {
-
-			// se o tipo de uniforme for esportivo, poderá inserir um modelo de uniforme diferente dentro do pacote
-
-			Object[] options = { "SIM", "NÃO" };
-			int selectedOption = JOptionPane.showOptionDialog(null, "Deseja informar uniformes de goleiro?", "ESCOLHA",
-					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-			if (selectedOption == JOptionPane.YES_OPTION) {
-
-				montaUniformeGoleiro(listaUniforme, pacote);
-
-			}
-
-		}
-
-		return teste;
+		return nomePacote;
 
 	}
 	
-	/**
-	 * método responsável por montar o uniforme de goleiro
-	 * 
-	 * @param listaUniforme
-	 * @param pacote
-	 */
-	public void montaUniformeGoleiro(ArrayList<Uniforme> listaUniforme, Pacote pacote) {
-		
-		Uniforme uniformeGoleiro = new Uniforme();
-		Camisa camisaGoleiro = new Camisa();
-		Calca calcaGoleiro = new Calca();
-		Meia meiaGoleiro = new Meia();
-
-		pacote.setQtdUniformeGoleiro(insereQuantidadeUniforme());
-		uniformeGoleiro.setTipo("ESPORTIVO");
-		
-		PacoteControle.montaUniforme(pacote, uniformeGoleiro, camisaGoleiro, calcaGoleiro, meiaGoleiro);
-		
-		PacoteControle.adicionaUniformePacote(listaUniforme, uniformeGoleiro, camisaGoleiro, calcaGoleiro,
-				meiaGoleiro, pacote.getQtdUniformeGoleiro(), "S");
-		
-	}
-		
-	/**
-	 * método que le a quantidade de uniformes informada pelo usuário e retorna este
-	 * valor
-	 * 
-	 * @return
-	 */
 	public int insereQuantidadeUniforme() {
 
 		int qtdUniforme = 0;
@@ -94,11 +24,6 @@ public class PacoteApresentacao {
 		return qtdUniforme;
 	}
 
-	/**
-	 * método que le o tipo de uniforme informado pelo usuário e retorna este valor
-	 * 
-	 * @return
-	 */
 	public String insereTipoUniforme() {
 
 		String tipoUniforme;
@@ -120,14 +45,6 @@ public class PacoteApresentacao {
 		return tipoUniforme;
 	}
 
-	/**
-	 * método que le o tipo de camisa/calca/meia informado pelo usuário e retorna
-	 * este valor
-	 * 
-	 * @param objeto
-	 * @param titulo
-	 * @return
-	 */
 	public String insereTipo(String objeto, String titulo) {
 
 		String tipo;
@@ -148,16 +65,10 @@ public class PacoteApresentacao {
 		return tipo;
 	}
 
-	/**
-	 * método que le o modelo de gola da camisa informada pelo usuário e retorna
-	 * este valor
-	 * 
-	 * @return
-	 */
 	public String insereModeloGolaCamisa() {
 
 		String modeloGola;
-		String optionsModeloGola[] = { "V", "CANOA", "RULE", "U", "HENLEY", "OVERSIZED" };
+		String optionsModeloGola[] = { "V", "CANOA", "RULE", "U" };
 
 		int tipoInt = JOptionPane.showOptionDialog(null, "Escolha o modelo de Gola: ", "CAMISA - MODELO DE GOLA", 0, -1,
 				null, optionsModeloGola, null);
@@ -168,13 +79,9 @@ public class PacoteApresentacao {
 			modeloGola = "CANOA";
 		} else if (tipoInt == 2) {
 			modeloGola = "RULE";
-		} else if (tipoInt == 3) {
-			modeloGola = "U";
-		} else if (tipoInt == 4) {
-			modeloGola = "HENLEY";
 		} else {
-			modeloGola = "OVERSIZED";
-		}
+			modeloGola = "U";
+		} 
 		if (tipoInt == JOptionPane.CLOSED_OPTION) {
 			System.exit(0);
 		}
@@ -182,12 +89,6 @@ public class PacoteApresentacao {
 		return modeloGola;
 	}
 
-	/**
-	 * método que le a o tecido da camisa informado pelo usuário e retorna este
-	 * valor
-	 * 
-	 * @return
-	 */
 	public String insereTecidoCamisa() {
 
 		String tecidoCamisa;
@@ -210,14 +111,6 @@ public class PacoteApresentacao {
 		return tecidoCamisa;
 	}
 
-	/**
-	 * método que le a cor primaria/secundaria de camisa/calca/meia informada pelo
-	 * usuário e retorna este valor
-	 * 
-	 * @param tipoCor
-	 * @param objeto
-	 * @return
-	 */
 	public String insereCor(String tipoCor, String objeto) {
 
 		String cor;
@@ -242,14 +135,6 @@ public class PacoteApresentacao {
 		return cor;
 	}
 
-	/**
-	 * método que le o tamanho de camisa/calca informada pelo usuário e retorna este
-	 * valor
-	 * 
-	 * @param objeto
-	 * @param numeroUniforme
-	 * @return
-	 */
 	public String insereTamanho(String objeto, int numeroUniforme) {
 
 		String tamanho;
@@ -279,15 +164,10 @@ public class PacoteApresentacao {
 		return tamanho;
 	}
 
-	/**
-	 * método que le o tecido da calça informada pelo usuário e retorna este valor
-	 * 
-	 * @return
-	 */
 	public String insereTecidoCalca() {
 
 		String tecidoCalca;
-		String optionsTecidoCalca[] = { "ALGODAO", "LA", "LINHO", "CORTELINE", "MOLETOM" };
+		String optionsTecidoCalca[] = { "ALGODAO", "LA", "LINHO", "MOLETOM" };
 
 		int tipoInt = JOptionPane.showOptionDialog(null, "Escolha o tecido da Calça: ", "CALÇA - TECIDO", 0, -1, null,
 				optionsTecidoCalca, null);
@@ -298,8 +178,6 @@ public class PacoteApresentacao {
 			tecidoCalca = "LA";
 		} else if (tipoInt == 2) {
 			tecidoCalca = "LINHO";
-		} else if (tipoInt == 3) {
-			tecidoCalca = "CORTELINE";
 		} else {
 			tecidoCalca = "MOLETOM";
 		}
@@ -310,11 +188,6 @@ public class PacoteApresentacao {
 		return tecidoCalca;
 	}
 
-	/**
-	 * método que le o tecido da meia informada pelo usuário e retorna este valor
-	 * 
-	 * @return
-	 */
 	public String insereTecidoMeia() {
 
 		String tecidoMeia;
@@ -340,29 +213,48 @@ public class PacoteApresentacao {
 
 	}
 	
-	/**
-	 * método que retorna a listaUniforme
-	 * 
-	 * @return
-	 */
-	public ArrayList<Uniforme> getListaUniforme() {
+	public Boolean informaUniformeGoleiro() {
 		
-		return listaUniforme;
+		Boolean informaUniformeGoleiro;
+
+		Object[] options = { "SIM", "NÃO" };
+		int selectedOption = JOptionPane.showOptionDialog(null, "Deseja informar uniformes de goleiro?", "ESCOLHA",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (selectedOption == JOptionPane.YES_OPTION) {
+
+			informaUniformeGoleiro = true;
+
+		}else {
+			informaUniformeGoleiro = false;
+		}
+
+		return informaUniformeGoleiro;
 	}
 	
-	/**
-	 * exibe a string ListaPacote ao usuario
-	 * 
-	 * @param listaPacote
-	 */
+	public Boolean informaMeia(String tipoUniforme) {
+		
+		Boolean informaMeia = false;
+		
+		if(tipoUniforme.equals("COLEGIAL") || tipoUniforme.equals("EMPRESARIAL")) {
+			
+			Object[] options = { "SIM", "NÃO" };
+			int selectedOption = JOptionPane.showOptionDialog(null, "Deseja inserir Meias no(s) Uniforme(s)?", "ESCOLHA",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			if (selectedOption == JOptionPane.YES_OPTION) {
+	
+				informaMeia = true;
+	
+			}
+		}
+		
+		return informaMeia;
+	}
+	
 	public void listaPacote(String listaPacote) {
 
 		JOptionPane.showMessageDialog(null, listaPacote);
 	}
 
-	/**
-	 * Informa se a lista estiver vazia
-	 */
 	public void listaVazia() {
 
 		JOptionPane.showMessageDialog(null, "Pacote não cadastrado!", "PACOTE", 1);

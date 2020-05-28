@@ -1,6 +1,6 @@
 package controle;
 
-import java.util.ArrayList;
+import java.util.ArrayList;	
 
 import apresentacao.PacoteApresentacao;
 import modelo.Calca;
@@ -12,98 +12,150 @@ import modelo.Uniforme;
 public class PacoteControle {
 
 	static PacoteApresentacao pacoteApresentacao = new PacoteApresentacao();
-	private static ArrayList<Uniforme> listaPacote = new ArrayList<Uniforme>();
-
+	static Pacote pacote = new Pacote();
+	static int testaMeia = 0;
+	
 	/**
-	 * Essa função irá adicionar uniformes em uma lista de acordo com a quantidade
-	 * de uniformes que o usuário quer. O tamanho de calça e camisa será definido
-	 * individualmente para cada uniforme
+	 * método que montará o pacote
+	 * @param pacote
+	 */
+	public static void cadastraPacote() {
+
+		Uniforme uniforme = new Uniforme();
+		
+		pacote.setNomePacote(pacoteApresentacao.insereNomePacote());
+		pacote.setQtdUniforme(pacoteApresentacao.insereQuantidadeUniforme());
+		uniforme.setTipo(pacoteApresentacao.insereTipoUniforme());
+
+		montaUniforme(uniforme);
+		adicionaUniformePacote(uniforme, pacote.getQtdUniforme(), 0);
+
+		if (uniforme.getTipo().equals("ESPORTIVO")) {
+
+			// se o tipo de uniforme for esportivo, poderá inserir um modelo de uniforme diferente dentro do pacote
+
+			if (pacoteApresentacao.informaUniformeGoleiro()) {
+
+				montaUniformeGoleiro(pacote.getListaUniformes(), pacote);
+			}
+		}
+
+	}
+	
+	/**
+	 * Este método montará o uniforme de acordo com as informações que o usuário inserir
+	 * 
+	 * @param uniforme
+	 */
+	public static void montaUniforme(Uniforme uniforme) {
+		
+		Camisa camisa = new Camisa();
+		Calca calca = new Calca();
+		Meia meia = new Meia();
+		
+		camisa.setTecidoCamisa(pacoteApresentacao.insereTecidoCamisa());
+		camisa.setModeloManga(pacoteApresentacao.insereTipo("Manga", "CAMISA - TIPO DE MANGA"));
+		camisa.setModeloGola(pacoteApresentacao.insereModeloGolaCamisa());
+		camisa.setCorPrimaria(pacoteApresentacao.insereCor("primaria", "Camisa"));
+		camisa.setCorSecundaria(pacoteApresentacao.insereCor("secundaria", "Camisa"));
+
+		calca.setTecidoCalca(pacoteApresentacao.insereTecidoCalca());
+		calca.setTipoCalca(pacoteApresentacao.insereTipo("Calça", "CALÇA - TIPO DE CALÇA"));
+		calca.setCorPrimaria(pacoteApresentacao.insereCor("primaria", "Calça"));
+		calca.setCorSecundaria(pacoteApresentacao.insereCor("secundaria", "Calça"));
+		
+		if(pacoteApresentacao.informaMeia(uniforme.getTipo()) || uniforme.getTipo().equals("ESPORTIVO")) {
+			
+			meia.setTecidoMeia(pacoteApresentacao.insereTecidoMeia());
+			meia.setTipoMeia(pacoteApresentacao.insereTipo("Meia", "MEIA - TIPO DE MEIA"));
+			meia.setCor(pacoteApresentacao.insereCor("", "Meia"));
+			uniforme.setMeia(meia);
+			testaMeia = 1;
+			
+		}
+		
+		uniforme.setCamisa(camisa);
+		uniforme.setCalca(calca);
+
+	}
+	
+	/**
+	 * montara o uniforme do goleiro de acordo com os dados informados pelo usuario
 	 * 
 	 * @param listaUniforme
-	 * @param uniforme
-	 * @param camisa
-	 * @param calca
-	 * @param meia
-	 * @param qtdUniforme
+	 * @param pacote
 	 */
-	public static void adicionaUniformePacote(ArrayList<Uniforme> listaUniforme, Uniforme uniforme, Camisa camisa,
-			Calca calca, Meia meia, int qtdUniforme, String isGoleiro) {
+	public static void montaUniformeGoleiro(ArrayList<Uniforme> listaUniforme, Pacote pacote) {
+
+		Uniforme uniformeGoleiro = new Uniforme();
+
+		pacote.setQtdUniformeGoleiro(pacoteApresentacao.insereQuantidadeUniforme());
+		
+		uniformeGoleiro.setTipo("ESPORTIVO");
+
+		PacoteControle.montaUniforme(uniformeGoleiro);
+
+		adicionaUniformePacote(uniformeGoleiro, pacote.getQtdUniformeGoleiro(), 1);
+
+	}
+	
+	
+	/**
+	 * Essa função irá adicionar uniformes em uma lista de acordo com a quantidade de uniformes que o usuário quer. 
+	 * O tamanho de calça e camisa será definido individualmente para cada uniforme
+	 * 
+	 * @param uniforme
+	 * @param qtdUniforme
+	 * @param isGoleiro
+	 */
+	public static void adicionaUniformePacote(Uniforme uniforme, int qtdUniforme, int isGoleiro) {
 
 		for (int i = 0; i < qtdUniforme; i++) {
 
 			Uniforme uniforme2 = new Uniforme();
-			Camisa camisa2 = new Camisa();
-			Calca calca2 = new Calca();
-			Meia meia2 = new Meia();
+			Camisa camisa = new Camisa();
+			Calca calca = new Calca();
+			Meia meia = new Meia();
 
 			uniforme2.setTipo(uniforme.getTipo());
 
-			camisa2.setModeloManga(camisa.getModeloManga());
-			camisa2.setModeloGola(camisa.getModeloGola());
-			camisa2.setTecidoCamisa(camisa.getTecidoCamisa());
-			camisa2.setCorPrimaria(camisa.getCorPrimaria());
-			camisa2.setCorSecundaria(camisa.getCorSecundaria());
+			camisa.setModeloManga(uniforme.getCamisa().getModeloManga());
+			camisa.setModeloGola(uniforme.getCamisa().getModeloGola());
+			camisa.setTecidoCamisa(uniforme.getCamisa().getTecidoCamisa());
+			camisa.setCorPrimaria(uniforme.getCamisa().getCorPrimaria());
+			camisa.setCorSecundaria(uniforme.getCamisa().getCorSecundaria());
 
-			uniforme2.setCamisa(camisa2);
+			uniforme2.setCamisa(camisa);
 
-			calca2.setTipoCalca(calca.getTipoCalca());
-			calca2.setTecidoCalca(calca.getTecidoCalca());
-			calca2.setCorPrimaria(calca.getCorPrimaria());
-			calca2.setCorSecundaria(calca.getCorSecundaria());
+			calca.setTipoCalca(uniforme.getCalca().getTipoCalca());
+			calca.setTecidoCalca(uniforme.getCalca().getTecidoCalca());
+			calca.setCorPrimaria(uniforme.getCalca().getCorPrimaria());
+			calca.setCorSecundaria(uniforme.getCalca().getCorSecundaria());
 
-			uniforme2.setCalca(calca2);
-
-			meia2.setTipoMeia(meia.getTipoMeia());
-			meia2.setCor(meia.getCor());
-			meia2.setTecidoMeia(meia.getTecidoMeia());
-
-			uniforme2.setMeia(meia2);
-
+			uniforme2.setCalca(calca);
+			
+			if(testaMeia == 1) {
+				
+				meia.setTipoMeia(uniforme.getMeia().getTipoMeia());
+				meia.setCor(uniforme.getMeia().getCor());
+				meia.setTecidoMeia(uniforme.getMeia().getTecidoMeia());
+	
+				uniforme2.setMeia(meia);
+				
+			}
+			
 			uniforme2.getCamisa().setTamanho(pacoteApresentacao.insereTamanho("Camisa", i + 1));
 			uniforme2.getCalca().setTamanho(pacoteApresentacao.insereTamanho("Calça", i + 1));
 			
-			if(isGoleiro.equals("S")) {
+			if(isGoleiro == 1) {
 				uniforme2.setIsGoleiro("S");
 			}else {
 				uniforme2.setIsGoleiro("N");
 			}
 			
-			listaUniforme.add(uniforme2);
+			pacote.addUniforme(uniforme2);
 
 		}
-
-	}
-
-	/**
-	 * Este método montará o uniforme de acordo com as informações que o usuário
-	 * inserir
-	 * 
-	 * @param pacote
-	 * @param uniforme
-	 * @param camisa
-	 * @param calca
-	 * @param meia
-	 */
-	public static void montaUniforme(Pacote pacote, Uniforme uniforme, Camisa camisa, Calca calca, Meia meia) {
-
-		camisa.setModeloManga(pacoteApresentacao.insereTipo("Manga", "CAMISA - TIPO DE MANGA"));
-		camisa.setModeloGola(pacoteApresentacao.insereModeloGolaCamisa());
-		camisa.setTecidoCamisa(pacoteApresentacao.insereTecidoCamisa());
-		camisa.setCorPrimaria(pacoteApresentacao.insereCor("primaria", "Camisa"));
-		camisa.setCorSecundaria(pacoteApresentacao.insereCor("secundaria", "Camisa"));
-
-		calca.setTipoCalca(pacoteApresentacao.insereTipo("Calça", "CALÇA - TIPO DE CALÇA"));
-		calca.setTecidoCalca(pacoteApresentacao.insereTecidoCalca());
-		calca.setCorPrimaria(pacoteApresentacao.insereCor("primaria", "Calça"));
-		calca.setCorSecundaria(pacoteApresentacao.insereCor("secundaria", "Calça"));
-
-		meia.setTipoMeia(pacoteApresentacao.insereTipo("Meia", "MEIA - TIPO DE MEIA"));
-		meia.setCor(pacoteApresentacao.insereCor("", "Meia"));
-		meia.setTecidoMeia(pacoteApresentacao.insereTecidoMeia());
-
-		uniforme.setCamisa(camisa);
-		uniforme.setCalca(calca);
-		uniforme.setMeia(meia);
 
 	}
 
@@ -115,8 +167,8 @@ public class PacoteControle {
 
 		ArrayList<Uniforme> listaPacoteGoleiro = new ArrayList<Uniforme>();
 		ArrayList<Uniforme> listaPacoteCasual = new ArrayList<Uniforme>();
-
-		listaPacote = pacoteApresentacao.getListaUniforme();
+		ArrayList<Uniforme> listaPacote = pacote.getListaUniformes();
+		
 		String listaPacoteTemporaria = "";
 		int isGoleiro = 0;
 
@@ -163,9 +215,10 @@ public class PacoteControle {
 		if (lista.get(0).getIsGoleiro().equals("S")) {
 			tipoUniforme = " UNIFORME(S) TIPO ESPORTIVO - MODELO GOLEIRO";
 		} else {
-			tipoUniforme = " UNIFORME(S) TIPO " + listaPacote.get(0).getTipo();
+			tipoUniforme = " UNIFORME(S) TIPO " + pacote.getListaUniformes().get(0).getTipo();
 		}
-
+		
+		listaTemporaria += "PACOTE " + pacote.getNomePacote() + "\n\n";
 		listaTemporaria += Integer.toString(n) + tipoUniforme + "\n\n";
 		
 		listaTemporaria += "CAMISA(S): COR " 
@@ -180,12 +233,18 @@ public class PacoteControle {
 				+ " E " + lista.get(0).getCalca().getCorSecundaria() 
 				+ " - " + lista.get(0).getCalca().getTipoCalca()
 				+ " - TECIDO " + lista.get(0).getCalca().getTecidoCalca() + "\n";
-
-		listaTemporaria += "MEIA(S): COR " 
-				+ lista.get(0).getMeia().getCor() 
-				+ " - " + lista.get(0).getMeia().getTipoMeia() 
-				+ " - TECIDO " + lista.get(0).getMeia().getTecidoMeia() + "\n\n";
-
+		
+		if(testaMeia == 1) {
+			listaTemporaria += "MEIA(S): COR " 
+					+ lista.get(0).getMeia().getCor() 
+					+ " - " + lista.get(0).getMeia().getTipoMeia() 
+					+ " - TECIDO " + lista.get(0).getMeia().getTecidoMeia() + "\n";
+		}else {
+			listaTemporaria += "MEIA(S): NÃO CONTÉM \n"; 
+		}
+		
+		listaTemporaria += "\n";
+		
 		for (int i = 0; i < n; i++) {
 			
 			listaTemporaria += "TAMANHO CONJUNTO " 
@@ -199,4 +258,5 @@ public class PacoteControle {
 
 		return listaTemporaria;
 	}
+
 }
