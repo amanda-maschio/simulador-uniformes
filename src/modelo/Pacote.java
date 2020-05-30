@@ -7,7 +7,7 @@ public class Pacote {
 	private Integer codigoPacote;
 	private String nomePacote;
 	private Integer qtdUniforme;
-	private Integer qtdUniformeGoleiro;
+	private Integer qtdUniformeGoleiro = 0;
 	private ArrayList<Uniforme> listaUniformes = new ArrayList<>();
 	
 	public String getNomePacote() {

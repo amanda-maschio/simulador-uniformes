@@ -21,8 +21,8 @@ public class PacoteControle {
 	 * @param pacote
 	 */
 	public static void cadastraPacote() {
-
-		if (ClienteControle.getClientePessoaFisica().getCpf() == null
+		
+ 		if (ClienteControle.getClientePessoaFisica().getCpf() == null
 				&& ClienteControle.getClientePessoaJuridica().getCnpj() == null) {
 			
 			pacoteApresentacao.clienteVazio();
@@ -33,6 +33,7 @@ public class PacoteControle {
 			do {
 
 				testaMeia = 0;
+				
 				Pacote pacote = new Pacote();
 				Uniforme uniforme = new Uniforme();
 
@@ -80,7 +81,7 @@ public class PacoteControle {
 		camisa.setModeloGola(pacoteApresentacao.insereModeloGolaCamisa());
 		camisa.setCorPrimaria(pacoteApresentacao.insereCor("primaria", "Camisa"));
 		camisa.setCorSecundaria(pacoteApresentacao.insereCor("secundaria", "Camisa"));
-
+		
 		calca.setTecidoCalca(pacoteApresentacao.insereTecidoCalca());
 		calca.setTipoCalca(pacoteApresentacao.insereTipo("Calça", "CALÇA - TIPO DE CALÇA"));
 		calca.setCorPrimaria(pacoteApresentacao.insereCor("primaria", "Calça"));
@@ -92,13 +93,14 @@ public class PacoteControle {
 			meia.setTipoMeia(pacoteApresentacao.insereTipo("Meia", "MEIA - TIPO DE MEIA"));
 			meia.setCor(pacoteApresentacao.insereCor("", "Meia"));
 			uniforme.setMeia(meia);
+
 			testaMeia = 1;
-			
+						
 		}
 		
 		uniforme.setCamisa(camisa);
 		uniforme.setCalca(calca);
-
+	
 	}
 	
 	/**
@@ -161,9 +163,12 @@ public class PacoteControle {
 				meia.setTipoMeia(uniforme.getMeia().getTipoMeia());
 				meia.setCor(uniforme.getMeia().getCor());
 				meia.setTecidoMeia(uniforme.getMeia().getTecidoMeia());
-	
+				uniforme2.setTemMeia(1);
+				
 				uniforme2.setMeia(meia);
 				
+			}else {
+				uniforme2.setTemMeia(0);
 			}
 			
 			uniforme2.getCamisa().setTamanho(pacoteApresentacao.insereTamanho("Camisa", i + 1));
@@ -206,7 +211,7 @@ public class PacoteControle {
 			}
 
 			listaPacoteTemporaria = montaLista(listaPacoteCasual, listaPacoteTemporaria);
-
+			
 			if (isGoleiro == 1) {
 				listaPacoteTemporaria = montaLista(listaPacoteGoleiro, listaPacoteTemporaria);
 				pacoteApresentacao.listaPacote(listaPacoteTemporaria);

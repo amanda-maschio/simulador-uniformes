@@ -22,6 +22,8 @@ public class ClienteControle {
 
 		if (tipoCliente.equals("FISICA")) {
 			
+			//equals comparação de strings
+			
 			clientePessoaFisica = cadastraClienteFisica();
 			
 		} else {

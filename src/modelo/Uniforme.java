@@ -5,10 +5,17 @@ public class Uniforme{
 	private Integer codigoUniforme;
 	private String tipo; // Esportivo | Escolar | Empresa
 	private String isGoleiro;
+	private Integer temMeia;
 	private Camisa camisa;
 	private Calca calca;
 	private Meia meia;
-	
+
+	public Integer getTemMeia() {
+		return temMeia;
+	}
+	public void setTemMeia(Integer temMeia) {
+		this.temMeia = temMeia;
+	}
 	public String getIsGoleiro() {
 		return isGoleiro;
 	}
