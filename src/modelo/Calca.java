@@ -9,6 +9,20 @@ public class Calca{
 	private String corSecundaria;
 	private String tamanho; // P | PP | M | G | GG | EXG
 	
+	public Calca() {
+		
+	}
+	
+	public Calca(Integer codigoCalca, String tipoCalca, String tecidoCalca, String corPrimaria, String corSecundaria,
+			String tamanho) {
+		this.codigoCalca = codigoCalca;
+		this.tipoCalca = tipoCalca;
+		this.tecidoCalca = tecidoCalca;
+		this.corPrimaria = corPrimaria;
+		this.corSecundaria = corSecundaria;
+		this.tamanho = tamanho;
+	}
+	
 	public Integer getCodigoCalca() {
 		return codigoCalca;
 	}

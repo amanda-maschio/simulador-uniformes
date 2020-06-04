@@ -1,6 +1,10 @@
 package controle;
 
+import java.util.Date;
+
 import apresentacao.PedidoApresentacao;
+import modelo.ClientePessoaFisica;
+import modelo.ClientePessoaJuridica;
 import modelo.Pacote;
 import modelo.Pedido;
 import modelo.Uniforme;
@@ -8,21 +12,35 @@ import modelo.Uniforme;
 public class PedidoControle {
 
 	static PedidoApresentacao pedidoApresentacao = new PedidoApresentacao();
+	
 	static Pedido pedido = new Pedido();
 
 	public static void CadastraPedido() {
 		
-		if (ClienteControle.getClientePessoaFisica().getCpf() != null) {
-			pedido.setClientePessoaFisica(ClienteControle.getClientePessoaFisica());
+		Date dataCompra = new Date();
+		
+		pedido.setDataCompra(dataCompra);
+		pedido.setCodigoPedido(SimuladorControle.geraId());
+		
+		if (ClienteControle.getCliente() instanceof ClientePessoaFisica) {
+
+			ClientePessoaFisica clientePessoaFisica = (ClientePessoaFisica)ClienteControle.getCliente();
+			pedido.setClientePessoaFisica(clientePessoaFisica);
+			
 		} else {
-			pedido.setClientePessoaJuridica(ClienteControle.getClientePessoaJuridica());
+			
+			ClientePessoaJuridica clientePessoaJuridica = (ClientePessoaJuridica)ClienteControle.getCliente();
+			pedido.setClientePessoaJuridica(clientePessoaJuridica);
+			
 		}	
 		
 		pedido.setListaPacotes(PacoteControle.getListaPacotes());
 		pedido.setQtdPacote(pedido.getListaPacotes().size());
 		
 		pedido.setValorCompra(calculaTotalPedido(pedido));
+		
 		listaPedido();
+		
 		System.exit(0);
 
 	}
@@ -31,42 +49,49 @@ public class PedidoControle {
 		
 		Double ValorTotalCompra = 0.0;
 		String tipo = "";
-		Integer temMeia = 0;
+		Integer hasMeia = 0;
 		
 		for (Pacote pacote : pedido.getListaPacotes()) {
+			
 			for (Uniforme uniforme : pacote.getListaUniformes()) {
 				tipo = uniforme.getTipo();
-				if(uniforme.getTemMeia() != 0){
-					temMeia = 1;
+				
+				if(uniforme.getHasMeia() != 0){
+					hasMeia = 1;
 				}
+				
 			}
 		
-			ValorTotalCompra += calculaValorPacote(tipo, pacote.getQtdUniforme(), pacote.getQtdUniformeGoleiro(), temMeia);
-			temMeia = 0;
+			ValorTotalCompra += calculaValorPacote(pacote, tipo, hasMeia);
+			hasMeia = 0;
 		}
 		
 		return ValorTotalCompra;
 	}
 	
-	public static Double calculaValorPacote(String tipo, Integer qtdUni, Integer qtdUniGoleiro, Integer temMeia){
+	public static Double calculaValorPacote(Pacote pacote, String tipo, Integer hasMeia){
 		
 		Double valorTotalCompra;
 		
 		if(tipo.equals("EMPRESARIAL")) {
-			if(temMeia == 1) {
-				valorTotalCompra = (double) ((60 + 5) * qtdUni);
+			
+			if(hasMeia == 1) {
+				valorTotalCompra = (double) ((60 + 5) * pacote.getQtdUniforme());
 			}else {
-				valorTotalCompra = (double) (60 * qtdUni);
+				valorTotalCompra = (double) (60 * pacote.getQtdUniforme());
 			}
+			
 		}else if (tipo.equals("COLEGIAL")) {
-			if(temMeia == 1) {
-				valorTotalCompra = (double) ((80 + 5) * qtdUni);
+			
+			if(hasMeia == 1) {
+				valorTotalCompra = (double) ((80 + 5) * pacote.getQtdUniforme());
 			}else {
-				valorTotalCompra = (double) (80 * qtdUni);
+				valorTotalCompra = (double) (80 * pacote.getQtdUniforme());
 			}
+			
 		}else {
-			Double precoTotalGoleiro = (double) (150 * qtdUniGoleiro);
-			valorTotalCompra = (double) (100 * qtdUni) + precoTotalGoleiro;
+			Double precoTotalGoleiro = (double) (150 * pacote.getQtdUniformeGoleiro());
+			valorTotalCompra = (double) (100 * pacote.getQtdUniforme()) + precoTotalGoleiro;
 		}
 		
 		return valorTotalCompra;
@@ -80,11 +105,12 @@ public class PedidoControle {
 			pedidoApresentacao.pedidoVazio();
 			
 		}else {
+			
 			String listaPedido = "";
 			String endereco = "";
 			String email = "";
 			
-			if(ClienteControle.getClientePessoaFisica().getCpf() != null) {
+			if(ClienteControle.getCliente() instanceof ClientePessoaFisica) {
 				
 				listaPedido += pedido.getClientePessoaFisica().getNome();
 				endereco = pedido.getClientePessoaFisica().getEndereco();

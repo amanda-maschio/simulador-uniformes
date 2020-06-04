@@ -8,10 +8,21 @@ public class Pedido {
 	private Integer qtdPacote;
 	private Date dataCompra; 
 	private Double valorCompra;
+	
 	private ClientePessoaJuridica clientePessoaJuridica; 
 	private ClientePessoaFisica clientePessoaFisica;
 	private ArrayList<Pacote> listaPacotes = new ArrayList<>();
 	
+	public Pedido() {
+		
+	}
+	
+	public Pedido(Integer codigoPedido, Integer qtdPacote, Date dataCompra, Double valorCompra) {
+		this.codigoPedido = codigoPedido;
+		this.qtdPacote = qtdPacote;
+		this.dataCompra = dataCompra;
+		this.valorCompra = valorCompra;
+	}
 	public ArrayList<Pacote> getListaPacotes() {
 		return listaPacotes;
 	}

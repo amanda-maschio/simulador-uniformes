@@ -7,6 +7,17 @@ public class Meia{
 	private String cor;
 	private String tecidoMeia; // la | algodao | fibra | poliester
 	
+	public Meia() {
+		
+	}
+	
+	public Meia(Integer codigoMeia, String tipoMeia, String cor, String tecidoMeia) {
+		this.codigoMeia = codigoMeia;
+		this.tipoMeia = tipoMeia;
+		this.cor = cor;
+		this.tecidoMeia = tecidoMeia;
+	}
+	
 	public Integer getCodigoMeia() {
 		return codigoMeia;
 	}

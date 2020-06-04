@@ -4,24 +4,41 @@ public class Uniforme{
 	
 	private Integer codigoUniforme;
 	private String tipo; // Esportivo | Escolar | Empresa
-	private String isGoleiro;
-	private Integer temMeia;
+	private Integer hasGoleiro;
+	private Integer hasMeia;
+	
 	private Camisa camisa;
 	private Calca calca;
 	private Meia meia;
+	
+	public Uniforme() {
+		
+	}
 
-	public Integer getTemMeia() {
-		return temMeia;
+	public Uniforme(Integer codigoUniforme, String tipo, Integer hasGoleiro, Integer hasMeia) {
+		super();
+		this.codigoUniforme = codigoUniforme;
+		this.tipo = tipo;
+		this.hasGoleiro = hasGoleiro;
+		this.hasMeia = hasMeia;
 	}
-	public void setTemMeia(Integer temMeia) {
-		this.temMeia = temMeia;
+
+	public Integer getHasGoleiro() {
+		return hasGoleiro;
 	}
-	public String getIsGoleiro() {
-		return isGoleiro;
+
+	public void setHasGoleiro(Integer hasGoleiro) {
+		this.hasGoleiro = hasGoleiro;
 	}
-	public void setIsGoleiro(String isGoleiro) {
-		this.isGoleiro = isGoleiro;
+
+	public Integer getHasMeia() {
+		return hasMeia;
 	}
+
+	public void setHasMeia(Integer hasMeia) {
+		this.hasMeia = hasMeia;
+	}
+
 	public Integer getCodigoUniforme() {
 		return codigoUniforme;
 	}

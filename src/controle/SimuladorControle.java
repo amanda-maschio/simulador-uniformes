@@ -1,6 +1,7 @@
 package controle;
 
 import java.text.ParseException;
+import java.util.Random;
 
 import apresentacao.SimuladorApresentacao;
 
@@ -78,6 +79,14 @@ public class SimuladorControle {
 	
 	private void pesquisaClienteControle() {
 		ClienteControle.listaCliente();
+	}
+	
+	public static int geraId() {
+		
+		Random aleatorio = new Random();
+		int valor = aleatorio.nextInt((1000 - 0) + 1) + 0;
+		
+		return valor;
 	}
 
 

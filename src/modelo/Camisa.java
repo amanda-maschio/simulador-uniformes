@@ -10,6 +10,21 @@ public class Camisa{
 	private String corSecundaria;
 	private String tamanho; // P | PP | M | G | GG | EXG
 	
+	public Camisa() {
+		
+	}
+	
+	public Camisa(Integer codigoCamisa, String modeloManga, String modeloGola, String tecidoCamisa, String corPrimaria,
+			String corSecundaria, String tamanho) {
+		this.codigoCamisa = codigoCamisa;
+		this.modeloManga = modeloManga;
+		this.modeloGola = modeloGola;
+		this.tecidoCamisa = tecidoCamisa;
+		this.corPrimaria = corPrimaria;
+		this.corSecundaria = corSecundaria;
+		this.tamanho = tamanho;
+	}
+	
 	public Integer getCodigoCamisa() {
 		return codigoCamisa;
 	}

@@ -3,14 +3,16 @@ package controle;
 import java.text.ParseException;
 
 import apresentacao.ClienteApresentacao;
+import modelo.Cliente;
 import modelo.ClientePessoaFisica;
 import modelo.ClientePessoaJuridica;
 
 public class ClienteControle {
 
 	static ClienteApresentacao clienteApresentacao = new ClienteApresentacao();
-	static ClientePessoaFisica clientePessoaFisica = new ClientePessoaFisica();
-	static ClientePessoaJuridica clientePessoaJuridica = new ClientePessoaJuridica();
+	
+	static Cliente cliente = new Cliente();
+	static String tipoCliente;
 	
 	/**
 	 * metodo para cadastrar os dados do cliente
@@ -18,18 +20,17 @@ public class ClienteControle {
 	 */
 	public static void cadastraCliente() throws ParseException {
 
-		String tipoCliente = clienteApresentacao.insereTipoCliente();
+		tipoCliente = clienteApresentacao.insereTipoCliente();
 
 		if (tipoCliente.equals("FISICA")) {
 			
-			//equals comparação de strings
-			
-			clientePessoaFisica = cadastraClienteFisica();
+			cliente = cadastraClienteFisica();
+			cliente.setCodigoCliente(SimuladorControle.geraId());
 			
 		} else {
 			
-			clientePessoaJuridica = cadastraClienteJuridica();
-			
+			cliente = cadastraClienteJuridica();
+			cliente.setCodigoCliente(SimuladorControle.geraId());
 		}
 		
 	}
@@ -44,6 +45,7 @@ public class ClienteControle {
 		
 		ClientePessoaFisica clientePessoaFisica = new ClientePessoaFisica();
 		
+		clientePessoaFisica.setCodigoCliente(SimuladorControle.geraId());
 		clientePessoaFisica.setNome(clienteApresentacao.insereNomeOuRazao("o nome", "NOME"));
 		clientePessoaFisica.setSexo(clienteApresentacao.insereSexo());
 		clientePessoaFisica.setCpf(clienteApresentacao.insereDocumento("CPF"));
@@ -64,6 +66,7 @@ public class ClienteControle {
 		
 		ClientePessoaJuridica clientePessoaJuridica = new ClientePessoaJuridica();
 		
+		clientePessoaJuridica.setCodigoClienteJuridica(SimuladorControle.geraId());
 		clientePessoaJuridica.setRazaoSocial(clienteApresentacao.insereNomeOuRazao("a razao social", "RAZAO SOCIAL"));
 		clientePessoaJuridica.setEmail(clienteApresentacao.insereEmail());
 		clientePessoaJuridica.setTelefone(clienteApresentacao.insereTelefone());
@@ -81,18 +84,20 @@ public class ClienteControle {
 
 		String listaClienteTemporaria = "";
 
-		if (clientePessoaFisica.getCpf() != null) {
-			
-			listaClienteTemporaria = montaListaFisica(clientePessoaFisica);
-			clienteApresentacao.listaCliente(listaClienteTemporaria);
-		
-		} else if (clientePessoaJuridica.getCnpj() != null) {
-			
-			listaClienteTemporaria = montaListaJuridica(clientePessoaJuridica);
-			clienteApresentacao.listaCliente(listaClienteTemporaria);
-		
-		} else {
+		if (tipoCliente == null) {
+
 			clienteApresentacao.listaVazia();
+
+		} else if (tipoCliente.equals("FISICA")) {
+
+			listaClienteTemporaria = montaListaFisica(cliente);
+			clienteApresentacao.listaCliente(listaClienteTemporaria);
+
+		} else {
+
+			listaClienteTemporaria = montaListaJuridica(cliente);
+			clienteApresentacao.listaCliente(listaClienteTemporaria);
+
 		}
 	}
 	
@@ -102,7 +107,9 @@ public class ClienteControle {
 	 * @param clientePessoaJuridica
 	 * @return
 	 */
-	private static String montaListaJuridica(ClientePessoaJuridica clientePessoaJuridica) {
+	private static String montaListaJuridica(Cliente cliente) {
+		
+		ClientePessoaJuridica clientePessoaJuridica = (ClientePessoaJuridica)cliente;
 		
 		String listaJuridica = "";
 		
@@ -120,8 +127,10 @@ public class ClienteControle {
 	 * @param clientePessoaFisica
 	 * @return
 	 */
-	private static String montaListaFisica(ClientePessoaFisica clientePessoaFisica) {
+	private static String montaListaFisica(Cliente cliente) {
 		
+		ClientePessoaFisica clientePessoaFisica = (ClientePessoaFisica)cliente;
+
 		String listaFisica = "";
 
 		listaFisica += "CLIENTE " + clientePessoaFisica.getNome() + ": \n\n"
@@ -132,14 +141,9 @@ public class ClienteControle {
 		return listaFisica;
 	}
 	
-	public static ClientePessoaFisica getClientePessoaFisica() {
+	public static Cliente getCliente() {
 		
-		return clientePessoaFisica;
-	}
-	
-	public static ClientePessoaJuridica getClientePessoaJuridica() {
-		
-		return clientePessoaJuridica;
+		return cliente;
 	}
 	
 }
