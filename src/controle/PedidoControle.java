@@ -11,41 +11,50 @@ import modelo.Uniforme;
 
 public class PedidoControle {
 
-	static PedidoApresentacao pedidoApresentacao = new PedidoApresentacao();
+	PedidoApresentacao pedidoApresentacao = new PedidoApresentacao();
+	Pedido pedido = new Pedido();
+
+	public void CadastraPedido() {
+		
+		if (PacoteControle.getListaPacotes().isEmpty()) {
+			
+			pedidoApresentacao.pacoteVazio();
+			
+		}else {
+			
+			Date dataCompra = new Date();
+			
+			pedido.setDataCompra(dataCompra);
+			
+			if (ClienteControle.getCliente() instanceof ClientePessoaFisica) {
 	
-	static Pedido pedido = new Pedido();
-
-	public static void CadastraPedido() {
-		
-		Date dataCompra = new Date();
-		
-		pedido.setDataCompra(dataCompra);
-		pedido.setCodigoPedido(SimuladorControle.geraId());
-		
-		if (ClienteControle.getCliente() instanceof ClientePessoaFisica) {
-
-			ClientePessoaFisica clientePessoaFisica = (ClientePessoaFisica)ClienteControle.getCliente();
-			pedido.setClientePessoaFisica(clientePessoaFisica);
+				ClientePessoaFisica clientePessoaFisica = (ClientePessoaFisica)ClienteControle.getCliente();
+				pedido.setClientePessoaFisica(clientePessoaFisica);
+				
+			} else {
+				
+				ClientePessoaJuridica clientePessoaJuridica = (ClientePessoaJuridica)ClienteControle.getCliente();
+				pedido.setClientePessoaJuridica(clientePessoaJuridica);
+				
+			}	
 			
-		} else {
+			pedido.setListaPacotes(PacoteControle.getListaPacotes());
+			pedido.setQtdPacote(pedido.getListaPacotes().size());
 			
-			ClientePessoaJuridica clientePessoaJuridica = (ClientePessoaJuridica)ClienteControle.getCliente();
-			pedido.setClientePessoaJuridica(clientePessoaJuridica);
+			pedido.setValorCompra(calculaTotalPedido(pedido));
 			
-		}	
-		
-		pedido.setListaPacotes(PacoteControle.getListaPacotes());
-		pedido.setQtdPacote(pedido.getListaPacotes().size());
-		
-		pedido.setValorCompra(calculaTotalPedido(pedido));
-		
-		listaPedido();
-		
-		System.exit(0);
-
+			listaPedido();
+			
+			if (pedidoApresentacao.confirmaPedido()) {
+				pedidoApresentacao.pedidoIncluido();
+			}else {
+				pedidoApresentacao.pedidoCancelado();
+			}
+			
+		}
 	}
 	
-	public static Double calculaTotalPedido(Pedido pedido) {
+	public Double calculaTotalPedido(Pedido pedido) {
 		
 		Double ValorTotalCompra = 0.0;
 		String tipo = "";
@@ -69,7 +78,7 @@ public class PedidoControle {
 		return ValorTotalCompra;
 	}
 	
-	public static Double calculaValorPacote(Pacote pacote, String tipo, Integer hasMeia){
+	public Double calculaValorPacote(Pacote pacote, String tipo, Integer hasMeia){
 		
 		Double valorTotalCompra;
 		
@@ -98,9 +107,9 @@ public class PedidoControle {
 		
 	}
 	
-	public static void listaPedido() {
+	public void listaPedido() {
 		
-		if(pedido == null) {
+		if(pedido.getQtdPacote() == 0) {
 			
 			pedidoApresentacao.pedidoVazio();
 			

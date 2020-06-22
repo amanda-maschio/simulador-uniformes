@@ -41,8 +41,8 @@ public class PacoteApresentacao {
 		
 		Boolean insereNovoPacote = false;
 		
-		Object[] options = { "INSERIR NOVO PACOTE", "FINALIZAR PEDIDO" };
-		int selectedOption = JOptionPane.showOptionDialog(null, "Pacote incluído. Deseja incluir mais Pacotes ou finalizar o Pedido?", "ESCOLHA",
+		Object[] options = { "SIM", "NÃO" };
+		int selectedOption = JOptionPane.showOptionDialog(null, "Pacote incluído. Deseja incluir mais Pacotes?", "ESCOLHA",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if (selectedOption == JOptionPane.YES_OPTION) {
 

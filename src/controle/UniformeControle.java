@@ -8,14 +8,14 @@ import modelo.Uniforme;
 
 public class UniformeControle {
 	
-	static UniformeApresentacao uniformeApresentacao = new UniformeApresentacao();
+	UniformeApresentacao uniformeApresentacao = new UniformeApresentacao();
 	
 	/**
 	 * método responsável por incluir as informações inseridas pelo usuário dentro do Uniforme
 	 * 
 	 * @param uniforme
 	 */
-	public static void montaUniforme(Uniforme uniforme) {
+	public void montaUniforme(Uniforme uniforme) {
 
 		uniforme.setCamisa(montaCamisa());
 		uniforme.setCalca(montaCalca());
@@ -31,7 +31,7 @@ public class UniformeControle {
 
 	}
 	
-	public static Camisa montaCamisa() {
+	public Camisa montaCamisa() {
 
 		Camisa camisa = new Camisa();
 
@@ -44,7 +44,7 @@ public class UniformeControle {
 		return camisa;
 	}
 	
-	public static Calca montaCalca() {
+	public Calca montaCalca() {
 		
 		Calca calca = new Calca();
 		
@@ -56,7 +56,7 @@ public class UniformeControle {
 		return calca;
 	}
 	
-	public static Meia montaMeia() {
+	public Meia montaMeia() {
 		
 		Meia meia = new Meia();
 		

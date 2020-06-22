@@ -1,7 +1,6 @@
 package controle;
 
 import java.text.ParseException;
-import java.util.Random;
 
 import apresentacao.SimuladorApresentacao;
 
@@ -10,10 +9,11 @@ public class SimuladorControle {
 	SimuladorApresentacao simuladorApresentacao = new SimuladorApresentacao();
 	PacoteControle pacoteControle = new PacoteControle();
 	ClienteControle clienteControle = new ClienteControle();
-
+	PedidoControle pedidoControle = new PedidoControle();
+	
 	public SimuladorControle() throws ParseException {
 		int op = 0;
-		while (op != 3) {
+		while (op != 4) {
 			op = simuladorApresentacao.mostraMenuPrincipal();
 			switch (op) {
 			case 1:
@@ -21,6 +21,9 @@ public class SimuladorControle {
 				break;
 			case 2:
 				menuPacote();
+				break;
+			case 3:
+				menuPedido();
 				break;
 			}
 		}
@@ -44,7 +47,7 @@ public class SimuladorControle {
 
 	public void menuPacote() {
 		int op = 0;
-		while (op != 4) {
+		while (op != 3) {
 			op = simuladorApresentacao.mostraMenuPacote();
 			switch (op) {
 			case 1:
@@ -53,41 +56,50 @@ public class SimuladorControle {
 			case 2:
 				pesquisaTodosPacotesControle();
 				break;
-			case 3:
-				pesquisaPacoteControle();
+			}
+		}
+	}
+	
+	public void menuPedido() {
+		int op = 0;
+		while (op != 3) {
+			op = simuladorApresentacao.mostraMenuPedido();
+			switch (op) {
+			case 1:
+				adicionaPedidoControle();
+				break;
+			case 2:
+				pesquisaPedidoControle();
 				break;
 			}
 		}
 	}
 
-	private void adicionaPacoteControle() {
-		PacoteControle.cadastraPacote();
+	private void pesquisaPedidoControle() {
+		pedidoControle.listaPedido();
+		
 	}
-	
-	private void pesquisaPacoteControle() {
-		PacoteControle.listaPacote();
+
+	private void adicionaPedidoControle() {
+		pedidoControle.CadastraPedido();
+		
+	}
+
+	private void adicionaPacoteControle() {
+		pacoteControle.cadastraPacote();
 	}
 	
 	private void pesquisaTodosPacotesControle() {
-		PacoteControle.listaTodosPacotesResumidos();
+		pacoteControle.listaTodosPacotesResumidos();
 	}
 
 	private void adicionaClienteControle() throws ParseException {
 		
-		ClienteControle.cadastraCliente();
+		clienteControle.cadastraCliente();
 	}
 	
 	private void pesquisaClienteControle() {
-		ClienteControle.listaCliente();
+		clienteControle.listaCliente();
 	}
-	
-	public static int geraId() {
-		
-		Random aleatorio = new Random();
-		int valor = aleatorio.nextInt((1000 - 0) + 1) + 0;
-		
-		return valor;
-	}
-
 
 }

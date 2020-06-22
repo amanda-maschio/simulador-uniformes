@@ -9,28 +9,26 @@ import modelo.ClientePessoaJuridica;
 
 public class ClienteControle {
 
-	static ClienteApresentacao clienteApresentacao = new ClienteApresentacao();
+	ClienteApresentacao clienteApresentacao = new ClienteApresentacao();
 	
 	static Cliente cliente = new Cliente();
-	static String tipoCliente;
+	String tipoCliente;
 	
 	/**
 	 * metodo para cadastrar os dados do cliente
 	 * @throws ParseException
 	 */
-	public static void cadastraCliente() throws ParseException {
+	public void cadastraCliente() throws ParseException {
 
 		tipoCliente = clienteApresentacao.insereTipoCliente();
 
 		if (tipoCliente.equals("FISICA")) {
 			
 			cliente = cadastraClienteFisica();
-			cliente.setCodigoCliente(SimuladorControle.geraId());
 			
 		} else {
 			
 			cliente = cadastraClienteJuridica();
-			cliente.setCodigoCliente(SimuladorControle.geraId());
 		}
 		
 	}
@@ -41,11 +39,10 @@ public class ClienteControle {
 	 * @return
 	 * @throws ParseException
 	 */
-	public static ClientePessoaFisica cadastraClienteFisica() throws ParseException {
+	public ClientePessoaFisica cadastraClienteFisica() throws ParseException {
 		
 		ClientePessoaFisica clientePessoaFisica = new ClientePessoaFisica();
 		
-		clientePessoaFisica.setCodigoCliente(SimuladorControle.geraId());
 		clientePessoaFisica.setNome(clienteApresentacao.insereNomeOuRazao("o nome", "NOME"));
 		clientePessoaFisica.setSexo(clienteApresentacao.insereSexo());
 		clientePessoaFisica.setCpf(clienteApresentacao.insereDocumento("CPF"));
@@ -62,11 +59,10 @@ public class ClienteControle {
 	 * 
 	 * @return
 	 */
-	public static ClientePessoaJuridica cadastraClienteJuridica() {
+	public ClientePessoaJuridica cadastraClienteJuridica() {
 		
 		ClientePessoaJuridica clientePessoaJuridica = new ClientePessoaJuridica();
 		
-		clientePessoaJuridica.setCodigoClienteJuridica(SimuladorControle.geraId());
 		clientePessoaJuridica.setRazaoSocial(clienteApresentacao.insereNomeOuRazao("a razao social", "RAZAO SOCIAL"));
 		clientePessoaJuridica.setEmail(clienteApresentacao.insereEmail());
 		clientePessoaJuridica.setTelefone(clienteApresentacao.insereTelefone());
@@ -80,7 +76,7 @@ public class ClienteControle {
 	 * exibe os dados do cliente de acordo com os dados informados pelo usuario
 	 * 
 	 */
-	public static void listaCliente() {
+	public void listaCliente() {
 
 		String listaClienteTemporaria = "";
 

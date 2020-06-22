@@ -12,17 +12,18 @@ import modelo.Uniforme;
 
 public class PacoteControle {
 
-	static PacoteApresentacao pacoteApresentacao = new PacoteApresentacao();
-	static UniformeApresentacao uniformeApresentacao = new UniformeApresentacao();
-	
-	static ArrayList<Pacote> listaPacotes = new ArrayList<>();
-	static Pacote pacoteLista = new Pacote(); //este pacote receberá o pacote criado no CadastraPacote(), para conseguirmos exibir a listagem detalhada do pacote
+	 PacoteApresentacao pacoteApresentacao = new PacoteApresentacao();
+	 UniformeApresentacao uniformeApresentacao = new UniformeApresentacao();
+	 UniformeControle uniformeControle = new UniformeControle();
+	 
+	 static ArrayList<Pacote> listaPacotes = new ArrayList<>();
+	 Pacote pacoteLista = new Pacote(); //este pacote receberá o pacote criado no CadastraPacote(), para conseguirmos exibir a listagem detalhada do pacote
 	
 	/**
 	 * método que montará o pacote
 	 * @param pacote
 	 */
-	public static void cadastraPacote() {
+	public void cadastraPacote() {
 		
  		if (ClienteControle.getCliente().getEmail() == null) {
 			
@@ -36,13 +37,12 @@ public class PacoteControle {
 				Pacote pacote = new Pacote();
 				Uniforme uniforme = new Uniforme();
 				
-				pacote.setCodigoPacote(SimuladorControle.geraId());
 				pacote.setNomePacote(pacoteApresentacao.insereNomePacote());
 				pacote.setQtdUniforme(pacoteApresentacao.insereQuantidadeUniforme());
 				
 				uniforme.setTipo(uniformeApresentacao.insereTipoUniforme());
 
-				UniformeControle.montaUniforme(uniforme);
+				uniformeControle.montaUniforme(uniforme);
 				adicionaUniformePacote(pacote, uniforme, pacote.getQtdUniforme(), 0);
 				
 				if (uniforme.getTipo().equals("ESPORTIVO")) {
@@ -66,8 +66,6 @@ public class PacoteControle {
 				
 			} while (pacoteApresentacao.insereNovoPacote()); //Enquanto o usuário optar por incluir novos pacotes, a operação repetirá
 			
-			PedidoControle.CadastraPedido();
-			
 		}
 	}
 	
@@ -77,14 +75,14 @@ public class PacoteControle {
 	 * 
 	 * @param pacote
 	 */
-	public static void montaUniformeGoleiro(Pacote pacote) {
+	public void montaUniformeGoleiro(Pacote pacote) {
 
 		Uniforme uniformeGoleiro = new Uniforme();
 
 		pacote.setQtdUniformeGoleiro(pacoteApresentacao.insereQuantidadeUniforme());
 		uniformeGoleiro.setTipo("ESPORTIVO");
 
-		UniformeControle.montaUniforme(uniformeGoleiro);
+		uniformeControle.montaUniforme(uniformeGoleiro);
 
 		adicionaUniformePacote(pacote, uniformeGoleiro, pacote.getQtdUniformeGoleiro(), 1);
 
@@ -99,7 +97,7 @@ public class PacoteControle {
 	 * @param qtdUniforme
 	 * @param isGoleiro
 	 */
-	public static void adicionaUniformePacote(Pacote pacote, Uniforme uniforme, int qtdUniforme, int isGoleiro) {
+	public void adicionaUniformePacote(Pacote pacote, Uniforme uniforme, int qtdUniforme, int isGoleiro) {
 
 		for (int i = 0; i < qtdUniforme; i++) {
 
@@ -108,7 +106,6 @@ public class PacoteControle {
 			Calca calca = new Calca();
 			Meia meia = new Meia();
 			
-			uniforme2.setCodigoUniforme(SimuladorControle.geraId());
 			uniforme2.setTipo(uniforme.getTipo());
 
 			camisa.setModeloManga(uniforme.getCamisa().getModeloManga());
@@ -158,7 +155,7 @@ public class PacoteControle {
 	 * método que chamará a lista de uniformes (pacote) a ser exibida de acordo com o que foi
 	 * cadastrado pelo usuário
 	 */
-	public static void listaPacote() {
+	public void listaPacote() {
 
 		ArrayList<Uniforme> listaPacoteGoleiro = new ArrayList<Uniforme>();
 		ArrayList<Uniforme> listaPacoteCasual = new ArrayList<Uniforme>();
@@ -202,7 +199,7 @@ public class PacoteControle {
 	 * @param listaTemporaria
 	 * @return
 	 */
-	public static String montaLista(ArrayList<Uniforme> lista, String listaTemporaria) {
+	public String montaLista(ArrayList<Uniforme> lista, String listaTemporaria) {
 
 		int n = lista.size();
 		String tipoUniforme;
@@ -269,7 +266,7 @@ public class PacoteControle {
 	/**
 	 * Listagem resumida de todos os pacotes inseridos
 	 */
-	public static void listaTodosPacotesResumidos() {
+	public void listaTodosPacotesResumidos() {
 		
 		String listaTodosPacotesResumidos = "";
 			

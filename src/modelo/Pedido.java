@@ -5,7 +5,7 @@ import java.util.Date;
 public class Pedido {
 	
 	private Integer codigoPedido;
-	private Integer qtdPacote;
+	private Integer qtdPacote = 0;
 	private Date dataCompra; 
 	private Double valorCompra;
 	
