@@ -6,12 +6,14 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import modelo.excecoes.CampoVazioException;
+
 public class ClienteApresentacao {
 
 	public String insereDocumento(String tipoDeDocumento) {
 
-		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "TELEFONE", -1);
-
+		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "DOCUMENTO", -1);
+	
 		return documento;
 
 	}
@@ -36,14 +38,23 @@ public class ClienteApresentacao {
 
 	}
 	
-	public Date insereNascimento() throws ParseException {
+	public Date insereNascimento(){
+		
+		Date d1 = new Date();
 
-		String nascimento = JOptionPane.showInputDialog(null, "Digite a data de nascimento (dd/mm/aaaa): ",
-				"NASCIMENTO", -1);
+		do {
+			try {
+				String nascimento = JOptionPane.showInputDialog(null, "Digite a data de nascimento (dd/mm/aaaa): ",
+						"NASCIMENTO", -1);
+				SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+				d1 = data.parse(nascimento);
 
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		Date d1 = data.parse(nascimento);
-
+			} catch (ParseException e) {
+				JOptionPane.showMessageDialog(null, "Data inválida!", "ERRO", JOptionPane.ERROR_MESSAGE);
+				d1 = null;
+			}
+		} while (d1 == null);
+		
 		return d1;
 	}
 
@@ -71,7 +82,7 @@ public class ClienteApresentacao {
 	}
 
 	public String insereNomeOuRazao(String tipoDeCliente, String tipo) {
-
+	
 		String nomeOuRazao = JOptionPane.showInputDialog(null, "Digite " + tipoDeCliente + ": ", tipo, -1);
 
 		return nomeOuRazao;
@@ -105,6 +116,12 @@ public class ClienteApresentacao {
 	public void listaCliente(String listaCliente) {
 
 		JOptionPane.showMessageDialog(null, listaCliente);
+
+	}
+	
+	public void campoVazio(CampoVazioException e) {
+
+		JOptionPane.showMessageDialog(null, e.getMessage(), "INVALIDO", JOptionPane.WARNING_MESSAGE);
 
 	}
 }

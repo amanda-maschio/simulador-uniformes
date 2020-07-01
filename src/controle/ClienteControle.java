@@ -18,7 +18,7 @@ public class ClienteControle {
 	 * metodo para cadastrar os dados do cliente
 	 * @throws ParseException
 	 */
-	public void cadastraCliente() throws ParseException {
+	public void cadastraCliente(){
 
 		tipoCliente = clienteApresentacao.insereTipoCliente();
 
@@ -39,8 +39,8 @@ public class ClienteControle {
 	 * @return
 	 * @throws ParseException
 	 */
-	public ClientePessoaFisica cadastraClienteFisica() throws ParseException {
-		
+	public ClientePessoaFisica cadastraClienteFisica() {
+
 		ClientePessoaFisica clientePessoaFisica = new ClientePessoaFisica();
 		
 		clientePessoaFisica.setNome(clienteApresentacao.insereNomeOuRazao("o nome", "NOME"));
