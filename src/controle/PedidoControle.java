@@ -8,6 +8,7 @@ import modelo.ClientePessoaJuridica;
 import modelo.Pacote;
 import modelo.Pedido;
 import modelo.Uniforme;
+import modelo.excecoes.ObjetoVazioException;
 
 public class PedidoControle {
 
@@ -18,7 +19,7 @@ public class PedidoControle {
 		
 		if (PacoteControle.getListaPacotes().isEmpty()) {
 			
-			pedidoApresentacao.pacoteVazio();
+			throw new ObjetoVazioException("Insira um Pacote primeiro!");
 			
 		}else {
 			
@@ -111,7 +112,7 @@ public class PedidoControle {
 		
 		if(pedido.getQtdPacote() == 0) {
 			
-			pedidoApresentacao.pedidoVazio();
+			throw new ObjetoVazioException("Nenhum pedido cadastrado!");
 			
 		}else {
 			

@@ -9,6 +9,7 @@ import modelo.Camisa;
 import modelo.Meia;
 import modelo.Pacote;
 import modelo.Uniforme;
+import modelo.excecoes.ObjetoVazioException;
 
 public class PacoteControle {
 
@@ -26,8 +27,8 @@ public class PacoteControle {
 	public void cadastraPacote() {
 		
  		if (ClienteControle.getCliente().getEmail() == null) {
-			
-			pacoteApresentacao.clienteVazio();
+ 			
+			throw new ObjetoVazioException("Insira um Cliente primeiro!");
 			
 		} 
 		else {
@@ -160,35 +161,28 @@ public class PacoteControle {
 		ArrayList<Uniforme> listaPacoteGoleiro = new ArrayList<Uniforme>();
 		ArrayList<Uniforme> listaPacoteCasual = new ArrayList<Uniforme>();
 		ArrayList<Uniforme> listaPacote = pacoteLista.getListaUniformes();
-		
+
 		String listaPacoteTemporaria = "";
 		int isGoleiro = 0;
 
-		if (listaPacote.isEmpty() == false) {
-
-			for (Uniforme uniforme : listaPacote) {
-				if (uniforme.getHasGoleiro() == 1) {
-					listaPacoteGoleiro.add(uniforme);
-					isGoleiro = 1;
-				} else {
-					listaPacoteCasual.add(uniforme);
-				}
-			}
-
-			listaPacoteTemporaria = montaLista(listaPacoteCasual, listaPacoteTemporaria);
-			
-			if (isGoleiro == 1) {
-				listaPacoteTemporaria = montaLista(listaPacoteGoleiro, listaPacoteTemporaria);
-				pacoteApresentacao.listaPacote(listaPacoteTemporaria);
+		for (Uniforme uniforme : listaPacote) {
+			if (uniforme.getHasGoleiro() == 1) {
+				listaPacoteGoleiro.add(uniforme);
+				isGoleiro = 1;
 			} else {
-				pacoteApresentacao.listaPacote(listaPacoteTemporaria);
+				listaPacoteCasual.add(uniforme);
 			}
-
-		} else {
-
-			pacoteApresentacao.listaVazia();
-
 		}
+
+		listaPacoteTemporaria = montaLista(listaPacoteCasual, listaPacoteTemporaria);
+
+		if (isGoleiro == 1) {
+			listaPacoteTemporaria = montaLista(listaPacoteGoleiro, listaPacoteTemporaria);
+			pacoteApresentacao.listaPacote(listaPacoteTemporaria);
+		} else {
+			pacoteApresentacao.listaPacote(listaPacoteTemporaria);
+		}
+
 	}
 
 	/**
@@ -272,7 +266,7 @@ public class PacoteControle {
 			
 		if (listaPacotes.isEmpty()) {
 			
-			pacoteApresentacao.listaVazia();
+			throw new ObjetoVazioException("Nenhum pacote cadastrado!");
 			
 		} else {
 

@@ -6,6 +6,7 @@ import apresentacao.ClienteApresentacao;
 import modelo.Cliente;
 import modelo.ClientePessoaFisica;
 import modelo.ClientePessoaJuridica;
+import modelo.excecoes.ObjetoVazioException;
 
 public class ClienteControle {
 
@@ -81,8 +82,8 @@ public class ClienteControle {
 		String listaClienteTemporaria = "";
 
 		if (tipoCliente == null) {
-
-			clienteApresentacao.listaVazia();
+			
+			throw new ObjetoVazioException("Cliente não cadastrado!");
 
 		} else if (tipoCliente.equals("FISICA")) {
 

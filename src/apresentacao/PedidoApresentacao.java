@@ -2,11 +2,13 @@ package apresentacao;
 
 import javax.swing.JOptionPane;
 
+import modelo.excecoes.ObjetoVazioException;
+
 public class PedidoApresentacao {
 	
-	public void pedidoVazio() {
+	public static void pedidoVazio(ObjetoVazioException e) {
 		
-		JOptionPane.showMessageDialog(null, "Nenhum pedido cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 
 	}
 
@@ -16,9 +18,9 @@ public class PedidoApresentacao {
 		
 	}
 	
-	public void pacoteVazio() {
+	public static void pacoteVazio(ObjetoVazioException e) {
 		
-		JOptionPane.showMessageDialog(null, "Insira um Pacote primeiro!", "ERRO", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		
 	}
 	

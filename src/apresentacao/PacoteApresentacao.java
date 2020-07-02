@@ -2,6 +2,8 @@ package apresentacao;
 
 import javax.swing.JOptionPane;
 
+import modelo.excecoes.ObjetoVazioException;
+
 public class PacoteApresentacao {
 
 	public String insereNomePacote() {
@@ -32,9 +34,9 @@ public class PacoteApresentacao {
 		JOptionPane.showMessageDialog(null, listaTodosPacotes);
 	}
 
-	public void listaVazia() {
+	public static void listaVazia(ObjetoVazioException e) {
 
-		JOptionPane.showMessageDialog(null, "Nenhum pacote cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public Boolean insereNovoPacote() {
@@ -52,9 +54,9 @@ public class PacoteApresentacao {
 		return insereNovoPacote;
 	}
 
-	public void clienteVazio() {
+	public static void clienteVazio(ObjetoVazioException e) {
 		
-		JOptionPane.showMessageDialog(null, "Insira um Cliente primeiro!", "ERRO", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		
 	}
 

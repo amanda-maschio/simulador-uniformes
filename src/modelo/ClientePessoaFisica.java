@@ -8,22 +8,21 @@ public class ClientePessoaFisica extends Cliente{
 	private String nome;
 	private Date nascimento;
 	private String sexo;
-	private String cpf;
+	private Long cpf;
 	
 	public ClientePessoaFisica() {
 		super();
 	}
-	
-	public ClientePessoaFisica(Integer codigoCliente, String email, String telefone, String endereco,
-			Integer codigoClienteFisica, String nome, Date nascimento, String sexo, String cpf) {
-		super(codigoCliente, email, telefone, endereco);
-		this.codigoClienteFisica = codigoClienteFisica;
+
+	public ClientePessoaFisica(String email, String telefone, String endereco, String nome, Date nascimento,
+			String sexo, Long cpf) {
+		super(email, telefone, endereco);
 		this.nome = nome;
 		this.nascimento = nascimento;
 		this.sexo = sexo;
 		this.cpf = cpf;
 	}
-	
+
 	public Integer getCodigoClienteFisica() {
 		return codigoClienteFisica;
 	}
@@ -48,10 +47,12 @@ public class ClientePessoaFisica extends Cliente{
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public String getCpf() {
+
+	public Long getCpf() {
 		return cpf;
 	}
-	public void setCpf(String cpf) {
+
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
 

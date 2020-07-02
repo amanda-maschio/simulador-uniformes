@@ -7,14 +7,15 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import modelo.excecoes.CampoVazioException;
+import modelo.excecoes.ObjetoVazioException;
 
 public class ClienteApresentacao {
 
-	public String insereDocumento(String tipoDeDocumento) {
+	public Long insereDocumento(String tipoDeDocumento) {
 
 		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "DOCUMENTO", -1);
 	
-		return documento;
+		return Long.parseLong(documento);
 
 	}
 	
@@ -107,9 +108,9 @@ public class ClienteApresentacao {
 		return tipoCliente;
 	}
 
-	public void listaVazia() {
+	public static void listaVazia(ObjetoVazioException e) {
 
-		JOptionPane.showMessageDialog(null, "Cliente não cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 
 	}
 	

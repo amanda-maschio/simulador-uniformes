@@ -4,20 +4,20 @@ public class ClientePessoaJuridica extends Cliente{
 
 	private Integer codigoClienteJuridica;
 	private String razaoSocial;
-	private String cnpj;
+	private Long cnpj;
 	
 	public ClientePessoaJuridica() {
 		super();
 	}
 	
-	public ClientePessoaJuridica(Integer codigoCliente, String email, String telefone, String endereco,
-			Integer codigoClienteJuridica, String razaoSocial, String cnpj) {
-		super(codigoCliente, email, telefone, endereco);
+	public ClientePessoaJuridica(String email, String telefone, String endereco, Integer codigoClienteJuridica,
+			String razaoSocial, Long cnpj) {
+		super(email, telefone, endereco);
 		this.codigoClienteJuridica = codigoClienteJuridica;
 		this.razaoSocial = razaoSocial;
 		this.cnpj = cnpj;
 	}
-	
+
 	public Integer getCodigoClienteJuridica() {
 		return codigoClienteJuridica;
 	}
@@ -30,11 +30,11 @@ public class ClientePessoaJuridica extends Cliente{
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
 	}
-	public String getCnpj() {
+	public Long getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(String cnpj) {
+	public void setCnpj(Long cnpj) {
 		this.cnpj = cnpj;
 	}
-	
+
 }

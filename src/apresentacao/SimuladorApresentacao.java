@@ -13,7 +13,7 @@ public class SimuladorApresentacao {
 		try {
 			opcao = Integer.parseInt(aux);
 		} catch (NumberFormatException e) {
-			opcao = 4;
+			System.exit(0);
 		}
 		
 		return opcao;
@@ -57,7 +57,7 @@ public class SimuladorApresentacao {
 		int opcao = 0;
 		String aux = JOptionPane.showInputDialog(null,
 				"1 - Finalizar Pedido \n2 - Listar resumo do Pedido\n3 - Menu Principal\n\nDigite o numero correspondente a uma das opções:",
-				"PACOTE", -1);
+				"PEDIDO", -1);
 
 		try {
 			opcao = Integer.parseInt(aux);

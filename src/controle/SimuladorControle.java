@@ -2,11 +2,16 @@ package controle;
 
 import java.text.ParseException;
 
+import apresentacao.ClienteApresentacao;
+import apresentacao.PacoteApresentacao;
+import apresentacao.PedidoApresentacao;
 import apresentacao.SimuladorApresentacao;
+import modelo.excecoes.ObjetoVazioException;
 
 public class SimuladorControle {
 
 	SimuladorApresentacao simuladorApresentacao = new SimuladorApresentacao();
+	
 	PacoteControle pacoteControle = new PacoteControle();
 	ClienteControle clienteControle = new ClienteControle();
 	PedidoControle pedidoControle = new PedidoControle();
@@ -76,21 +81,35 @@ public class SimuladorControle {
 	}
 
 	private void pesquisaPedidoControle() {
-		pedidoControle.listaPedido();
-		
+		try {
+			pedidoControle.listaPedido();
+		} catch (ObjetoVazioException e) {
+			PedidoApresentacao.pedidoVazio(e);
+		}
 	}
 
 	private void adicionaPedidoControle() {
-		pedidoControle.CadastraPedido();
-		
+		try {
+			pedidoControle.CadastraPedido();
+		} catch (ObjetoVazioException e) {
+			PedidoApresentacao.pacoteVazio(e);
+		}
 	}
 
 	private void adicionaPacoteControle() {
-		pacoteControle.cadastraPacote();
+		try {
+			pacoteControle.cadastraPacote();
+		} catch (ObjetoVazioException e) {
+			PacoteApresentacao.clienteVazio(e);
+		}
 	}
 	
 	private void pesquisaTodosPacotesControle() {
-		pacoteControle.listaTodosPacotesResumidos();
+		try {
+			pacoteControle.listaTodosPacotesResumidos();
+		} catch (ObjetoVazioException e) {
+			PacoteApresentacao.listaVazia(e);
+		}
 	}
 
 	private void adicionaClienteControle() throws ParseException {
@@ -99,7 +118,11 @@ public class SimuladorControle {
 	}
 	
 	private void pesquisaClienteControle() {
-		clienteControle.listaCliente();
+		try {
+			clienteControle.listaCliente();
+		} catch (ObjetoVazioException e) {
+			ClienteApresentacao.listaVazia(e);
+		}
 	}
 
 }

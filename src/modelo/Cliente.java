@@ -11,8 +11,7 @@ public class Cliente {
 		
 	}
 	
-	public Cliente(Integer codigoCliente, String email, String telefone, String endereco) {
-		this.codigoCliente = codigoCliente;
+	public Cliente(String email, String telefone, String endereco) {
 		this.email = email;
 		this.telefone = telefone;
 		this.endereco = endereco;
