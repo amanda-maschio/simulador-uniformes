@@ -12,17 +12,16 @@ public class Calca{
 	public Calca() {
 		
 	}
-	
-	public Calca(Integer codigoCalca, String tipoCalca, String tecidoCalca, String corPrimaria, String corSecundaria,
-			String tamanho) {
-		this.codigoCalca = codigoCalca;
+
+	public Calca(String tipoCalca, String tecidoCalca, String corPrimaria, String corSecundaria, String tamanho) {
+		super();
 		this.tipoCalca = tipoCalca;
 		this.tecidoCalca = tecidoCalca;
 		this.corPrimaria = corPrimaria;
 		this.corSecundaria = corSecundaria;
 		this.tamanho = tamanho;
 	}
-	
+
 	public Integer getCodigoCalca() {
 		return codigoCalca;
 	}

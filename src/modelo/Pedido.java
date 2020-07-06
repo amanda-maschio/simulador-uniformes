@@ -16,13 +16,18 @@ public class Pedido {
 	public Pedido() {
 		
 	}
-	
-	public Pedido(Integer codigoPedido, Integer qtdPacote, Date dataCompra, Double valorCompra) {
-		this.codigoPedido = codigoPedido;
+
+	public Pedido(Integer qtdPacote, Date dataCompra, Double valorCompra, ClientePessoaJuridica clientePessoaJuridica,
+			ClientePessoaFisica clientePessoaFisica, ArrayList<Pacote> listaPacotes) {
+		super();
 		this.qtdPacote = qtdPacote;
 		this.dataCompra = dataCompra;
 		this.valorCompra = valorCompra;
+		this.clientePessoaJuridica = clientePessoaJuridica;
+		this.clientePessoaFisica = clientePessoaFisica;
+		this.listaPacotes = listaPacotes;
 	}
+
 	public ArrayList<Pacote> getListaPacotes() {
 		return listaPacotes;
 	}

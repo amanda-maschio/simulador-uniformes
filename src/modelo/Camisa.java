@@ -13,10 +13,10 @@ public class Camisa{
 	public Camisa() {
 		
 	}
-	
-	public Camisa(Integer codigoCamisa, String modeloManga, String modeloGola, String tecidoCamisa, String corPrimaria,
-			String corSecundaria, String tamanho) {
-		this.codigoCamisa = codigoCamisa;
+
+	public Camisa(String modeloManga, String modeloGola, String tecidoCamisa, String corPrimaria, String corSecundaria,
+			String tamanho) {
+		super();
 		this.modeloManga = modeloManga;
 		this.modeloGola = modeloGola;
 		this.tecidoCamisa = tecidoCamisa;
@@ -24,7 +24,7 @@ public class Camisa{
 		this.corSecundaria = corSecundaria;
 		this.tamanho = tamanho;
 	}
-	
+
 	public Integer getCodigoCamisa() {
 		return codigoCamisa;
 	}

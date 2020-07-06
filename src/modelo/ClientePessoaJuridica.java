@@ -9,15 +9,11 @@ public class ClientePessoaJuridica extends Cliente{
 	public ClientePessoaJuridica() {
 		super();
 	}
-	
-	public ClientePessoaJuridica(String email, String telefone, String endereco, Integer codigoClienteJuridica,
-			String razaoSocial, Long cnpj) {
+	public ClientePessoaJuridica(String email, Long telefone, String endereco, String razaoSocial, Long cnpj) {
 		super(email, telefone, endereco);
-		this.codigoClienteJuridica = codigoClienteJuridica;
 		this.razaoSocial = razaoSocial;
 		this.cnpj = cnpj;
 	}
-
 	public Integer getCodigoClienteJuridica() {
 		return codigoClienteJuridica;
 	}

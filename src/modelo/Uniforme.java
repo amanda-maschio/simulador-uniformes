@@ -15,12 +15,14 @@ public class Uniforme{
 		
 	}
 
-	public Uniforme(Integer codigoUniforme, String tipo, Integer hasGoleiro, Integer hasMeia) {
+	public Uniforme(String tipo, Integer hasGoleiro, Integer hasMeia, Camisa camisa, Calca calca, Meia meia) {
 		super();
-		this.codigoUniforme = codigoUniforme;
 		this.tipo = tipo;
 		this.hasGoleiro = hasGoleiro;
 		this.hasMeia = hasMeia;
+		this.camisa = camisa;
+		this.calca = calca;
+		this.meia = meia;
 	}
 
 	public Integer getHasGoleiro() {

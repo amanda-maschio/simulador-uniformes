@@ -14,12 +14,14 @@ public class Pacote {
 	public Pacote() {
 		
 	}
-	
-	public Pacote(Integer codigoPacote, String nomePacote, Integer qtdUniforme, Integer qtdUniformeGoleiro) {
-		this.codigoPacote = codigoPacote;
+
+	public Pacote(String nomePacote, Integer qtdUniforme, Integer qtdUniformeGoleiro,
+			ArrayList<Uniforme> listaUniformes) {
+		super();
 		this.nomePacote = nomePacote;
 		this.qtdUniforme = qtdUniforme;
 		this.qtdUniformeGoleiro = qtdUniformeGoleiro;
+		this.listaUniformes = listaUniformes;
 	}
 
 	public Integer getCodigoPacote() {

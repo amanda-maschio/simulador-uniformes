@@ -14,8 +14,8 @@ public class ClientePessoaFisica extends Cliente{
 		super();
 	}
 
-	public ClientePessoaFisica(String email, String telefone, String endereco, String nome, Date nascimento,
-			String sexo, Long cpf) {
+	public ClientePessoaFisica(String email, Long telefone, String endereco, String nome, Date nascimento, String sexo,
+			Long cpf) {
 		super(email, telefone, endereco);
 		this.nome = nome;
 		this.nascimento = nascimento;

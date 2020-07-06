@@ -64,11 +64,11 @@ public class ClienteControle {
 		
 		ClientePessoaJuridica clientePessoaJuridica = new ClientePessoaJuridica();
 		
+		clientePessoaJuridica.setCnpj(clienteApresentacao.insereDocumento("CNPJ"));
 		clientePessoaJuridica.setRazaoSocial(clienteApresentacao.insereNomeOuRazao("a razao social", "RAZAO SOCIAL"));
 		clientePessoaJuridica.setEmail(clienteApresentacao.insereEmail());
 		clientePessoaJuridica.setTelefone(clienteApresentacao.insereTelefone());
 		clientePessoaJuridica.setEndereco(clienteApresentacao.insereEndereco());
-		clientePessoaJuridica.setCnpj(clienteApresentacao.insereDocumento("CNPJ"));
 		
 		return clientePessoaJuridica;
 	}

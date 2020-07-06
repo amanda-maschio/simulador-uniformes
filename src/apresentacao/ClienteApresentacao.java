@@ -13,8 +13,8 @@ public class ClienteApresentacao {
 
 	public Long insereDocumento(String tipoDeDocumento) {
 
-		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "DOCUMENTO", -1);
-	
+		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "DOCUMENTO", -1).replaceAll("[^0-9]", "");
+
 		return Long.parseLong(documento);
 
 	}
@@ -66,11 +66,11 @@ public class ClienteApresentacao {
 		return endereco;
 	}
 
-	public String insereTelefone() {
+	public Long insereTelefone() {
 
-		String telefone = JOptionPane.showInputDialog(null, "Digite o telefone:", "TELEFONE", -1);
+		String telefone = JOptionPane.showInputDialog(null, "Digite o telefone:", "TELEFONE", -1).replaceAll("[^0-9]", "");
 
-		return telefone;
+		return Long.parseLong(telefone);
 
 	}
 

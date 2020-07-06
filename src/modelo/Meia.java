@@ -11,13 +11,13 @@ public class Meia{
 		
 	}
 	
-	public Meia(Integer codigoMeia, String tipoMeia, String cor, String tecidoMeia) {
-		this.codigoMeia = codigoMeia;
+	public Meia(String tipoMeia, String cor, String tecidoMeia) {
+		super();
 		this.tipoMeia = tipoMeia;
 		this.cor = cor;
 		this.tecidoMeia = tecidoMeia;
 	}
-	
+
 	public Integer getCodigoMeia() {
 		return codigoMeia;
 	}
