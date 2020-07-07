@@ -6,17 +6,24 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-import modelo.excecoes.CampoVazioException;
 import modelo.excecoes.ObjetoVazioException;
 
 public class ClienteApresentacao {
 
-	public Long insereDocumento(String tipoDeDocumento) {
+	public Long insereDocumento(String String) {
 
-		String documento = JOptionPane.showInputDialog(null, "Digite o " + tipoDeDocumento + ": ", "DOCUMENTO", -1).replaceAll("[^0-9]", "");
-
-		return Long.parseLong(documento);
-
+		Long documento = null;
+		
+		do {
+			try {
+				String documentoAux = JOptionPane.showInputDialog(null, "Digite o " + String + ": ", "DOCUMENTO", -1).replaceAll("[^0-9]", "");
+				documento = Long.parseLong(documentoAux);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Documento inválido!", "ERRO", JOptionPane.ERROR_MESSAGE);
+			}
+		} while (documento == null);
+		
+		return documento;
 	}
 	
 	public String insereSexo() {
@@ -45,8 +52,7 @@ public class ClienteApresentacao {
 
 		do {
 			try {
-				String nascimento = JOptionPane.showInputDialog(null, "Digite a data de nascimento (dd/mm/aaaa): ",
-						"NASCIMENTO", -1);
+				String nascimento = JOptionPane.showInputDialog(null, "Digite a data de nascimento (dd/mm/aaaa): ",	"NASCIMENTO", -1);
 				SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 				d1 = data.parse(nascimento);
 
@@ -61,31 +67,67 @@ public class ClienteApresentacao {
 
 	public String insereEndereco() {
 
-		String endereco = JOptionPane.showInputDialog(null, "Digite o endereco: ", "ENDERECO", -1);
+		String endereco = "";
+		
+		do {
+			endereco = JOptionPane.showInputDialog(null, "Digite o Endereço:", "ENDEREÇO", -1);
+			
+			if (endereco.equals("") || endereco.trim().length() == 0) {
+				campoVazio();
+				endereco = null;
+			}
+		} while (endereco == null);
 
 		return endereco;
 	}
 
 	public Long insereTelefone() {
 
-		String telefone = JOptionPane.showInputDialog(null, "Digite o telefone:", "TELEFONE", -1).replaceAll("[^0-9]", "");
+		Long telefone = null;
 
-		return Long.parseLong(telefone);
+		do {
+			try {
+				String telefoneAux = JOptionPane.showInputDialog(null, "Digite o telefone:", "TELEFONE", -1).replaceAll("[^0-9]", "");
+				telefone = Long.parseLong(telefoneAux);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Telefone inválido!", "ERRO", JOptionPane.ERROR_MESSAGE);
+			}
+		} while (telefone == null);
+
+		return telefone;
 
 	}
 
 	public String insereEmail() {
 
-		String email = JOptionPane.showInputDialog(null, "Digite o e-mail:", "E-MAIL", -1);
-
+		String email = "";
+		
+		do {
+			email = JOptionPane.showInputDialog(null, "Digite o e-mail:", "E-MAIL", -1);
+			
+			if (email.equals("") || email.trim().length() == 0) {
+				campoVazio();
+				email = null;
+			}
+		} while (email == null);
+				
 		return email;
 
 	}
 
 	public String insereNomeOuRazao(String tipoDeCliente, String tipo) {
-	
-		String nomeOuRazao = JOptionPane.showInputDialog(null, "Digite " + tipoDeCliente + ": ", tipo, -1);
 
+		String nomeOuRazao = "";
+		
+		do {
+			nomeOuRazao = JOptionPane.showInputDialog(null, "Digite " + tipoDeCliente + ": ", tipo, -1);
+			
+			if (nomeOuRazao.equals("") || nomeOuRazao.trim().length() == 0) {
+				campoVazio();
+				nomeOuRazao = null;
+			}
+		} while (nomeOuRazao == null);
+		
 		return nomeOuRazao;
 	}
 
@@ -120,9 +162,8 @@ public class ClienteApresentacao {
 
 	}
 	
-	public void campoVazio(CampoVazioException e) {
-
-		JOptionPane.showMessageDialog(null, e.getMessage(), "INVALIDO", JOptionPane.WARNING_MESSAGE);
-
+	public void campoVazio() {
+		JOptionPane.showMessageDialog(null, "Campo vazio!", "ERRO - CAMPO OBRIGATÓRIO", JOptionPane.ERROR_MESSAGE);
 	}
+
 }

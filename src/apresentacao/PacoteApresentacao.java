@@ -16,10 +16,18 @@ public class PacoteApresentacao {
 	
 	public int insereQuantidadeUniforme() {
 
-		int qtdUniforme = 0;
+		Integer qtdUniforme = 0;
 
-		qtdUniforme = Integer
-				.parseInt(JOptionPane.showInputDialog(null, "Digite a quantidade de Uniformes: ", "QUANTIDADE", -1));
+		do {
+			try {
+				qtdUniforme = Integer.parseInt(
+						JOptionPane.showInputDialog(null, "Digite a quantidade de Uniformes: ", "QUANTIDADE", -1));
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Quantidade inválida! Informe somente números.", "ERRO",
+						JOptionPane.ERROR_MESSAGE);
+				qtdUniforme = null;
+			}
+		} while (qtdUniforme == null);
 
 		return qtdUniforme;
 	}

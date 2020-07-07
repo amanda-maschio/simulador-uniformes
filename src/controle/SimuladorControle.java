@@ -35,7 +35,7 @@ public class SimuladorControle {
 
 	}
 
-	private void menuCliente() throws ParseException {
+	private void menuCliente() {
 		int op = 0;
 		while (op != 3) {
 			op = simuladorApresentacao.mostraMenuCliente();
@@ -112,7 +112,7 @@ public class SimuladorControle {
 		}
 	}
 
-	private void adicionaClienteControle() throws ParseException {
+	private void adicionaClienteControle() {
 		
 		clienteControle.cadastraCliente();
 	}
