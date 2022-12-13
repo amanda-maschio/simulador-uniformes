@@ -9,7 +9,7 @@ Simulador de Uniformes é uma aplicação JAVA desenvolvida de acordo com as sol
 Ele reproduz uma compra de uniformes, onde o cliente pode montar o mesmo de acordo com a sua necessidade, escolhendo o tipo de uniforme, quantidade, cores e tamanhos.
 
 ## Modelo conceitual
-![Modelo Conceitual](https://github.com/amanda-maschio/simuladorUniformes/blob/master/assets/simuladoruniformes.png)
+<img alt="Modelo conceitual" title="#ModeloConceitual" src="assets/simuladoruniformes.png"/>
 
 # Tecnologias utilizadas
 ## Back end
