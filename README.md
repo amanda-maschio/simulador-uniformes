@@ -17,12 +17,38 @@ Ele reproduz uma compra de uniformes, onde o cliente pode montar o mesmo de acor
 
 # Autores
 
-Amanda Maschio - https://www.linkedin.com/in/amanda-maschio-272783186/
+<a href="https://github.com/amanda-maschio">
+ <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/65790874?v=4" width="100px;" alt="Amanda Maschio" title="Amanda Maschio"/>
+</a>
+<p>Amanda Maschio</p>
 
-Reginara Ferreira Borges
+[![Linkedin Badge](https://img.shields.io/badge/-Amanda-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/amanda-maschio-272783186/)](https://www.linkedin.com/in/amanda-maschio-272783186/) 
 
-William da Silva
+<br>
+
+<a href="https://github.com/dasilvawill">
+ <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/39096909?v=4" width="100px;" alt="William da Silva" title="William da Silva"/>
+</a>
+<p>William da Silva</p>
+
+[![Linkedin Badge](https://img.shields.io/badge/-William-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/william-da-silva-a74676166/)](https://www.linkedin.com/in/william-da-silva-a74676166/) 
+
+<br>
+
+<a href="https://github.com/reginaraferreira">
+ <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/65867756?v=4" width="100px;" alt="Reginara Ferreira Borges" title="Reginara Ferreira Borges"/>
+</a>
+<p>Reginara Ferreira Borges</p>
+
+[![Linkedin Badge](https://img.shields.io/badge/-Reginara-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/reginara-ferreira-borges-66a89bb8/)](https://www.linkedin.com/in/reginara-ferreira-borges-66a89bb8/) 
+
+<br>
 
 # Professor
 
-Daniel da Silva Cotrim
+<a href="https://github.com/dcotrim">
+ <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/12568905?v=4" width="100px;" alt="Daniel da Silva Cotrim" title="Daniel da Silva Cotrim"/>
+</a>
+<p>Daniel da Silva Cotrim</p>
+
+[![Linkedin Badge](https://img.shields.io/badge/-Daniel-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/dcotrim/)](https://www.linkedin.com/in/dcotrim/) 
